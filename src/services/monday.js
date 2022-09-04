@@ -75,3 +75,19 @@ export async function saveMondayUserData(user) {
     console.log(`Failed to save user(${userID})\'s information!\n`, err);
   }
 }
+
+/**
+ * Makes a call to the monday api to get the app's current context.
+ * @returns - An object containing "information about where this app is currently displayed, depending on the type of feature".
+ */
+export async function getMondayContext() {
+  try {
+    const res = await monday.get('context');
+
+    return res;
+  } catch (err) {
+    console.log("Couldn't get monday context! Returned null", err);
+
+    return null;
+  }
+}

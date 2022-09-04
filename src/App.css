@@ -5,11 +5,40 @@
   --mint: #17b890;
   --dark-mint: #00C874;
   --black: #000;
+  --white: #fff;
   --supernova-yellow: #FFB02E;
   --hemoglobin-red: #EE0808;
   --light-grey: #D1D1D1;
   --super-light-grey: #F2F2F2;
-  --suva-grey: #8A8A8A;
+}
+
+:root {
+  color-scheme: light;
+  --primary-txt-color: #000;
+  --secondary-txt-color: #8A8A8A;
+  --header-text-color1: #055425;
+
+  --primary-bg-color: #fff;
+  --secondary-bg-color: #dee5e5;
+  
+  --primary-shadow-color: #000;
+  color: var(--primary-txt-color);
+}
+
+:root {
+  color-scheme: dark;
+  --primary-txt-color: #fff;
+  --secondary-txt-color: #DBDBDB;
+  --body-txt-color1: #000;
+
+  --primary-bg-color: #f5fffd2b;
+
+  --primary-brder-color: #292F53;
+  --secondary-brder-color: #434e89;
+
+  --primary-shdow: 0 2px 10px #ffffff1c;
+
+  color: var(--primary-txt-color);
 }
 
 :root {
@@ -179,7 +208,7 @@ body {
 
 .App .main .bottom-row, .App .main .all-row {
   grid-template-columns: repeat(5, var(--progress-card-width));
-  gap: calc(var(--spacing-large) + 10px);
+  gap: calc(var(--spacing-large) + 18px);
   justify-content: end;
   grid-area: cards-bottom-row;
   overflow: visible;
@@ -191,122 +220,6 @@ body {
 
 .App .main .all-row {
   display: none;
-}
-
-.menu-modal {
-  display: grid;
-  grid-template-rows: max-content 1fr;
-  grid-template-areas: 
-    "header"
-    "submit";
-  position: absolute;
-  width: var(--modal-width);
-  top: 2.7rem;
-  right: 2.7rem;
-  transform-origin: top right;
-  background-color: var(--light-mint) !important;
-  border-radius: 8px;
-  border: 2px solid #fff;
-  box-shadow: 0 0 0 3px var(--light-mint) !important;
-  gap: var(--spacing-medium);
-  padding-bottom: var(--spacing-small);
-}
-
-.menu-modal form {
-  display: grid;
-  gap: var(--spacing-small);
-  grid-area: submit;
-}
-
-.menu-modal .header .heading {
-  color: var(--dark-green);
-  grid-area: header;
-  margin: 0;
-}
-
-.menu-modal .header .icon {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.menu-modal .header .icon {
-  outline: none;
-}
-
-.menu-modal .options {
-  justify-self: start;
-}
-
-.menu-modal .options .checkbox > div {
-  border: 1px solid var(--dark-green) !important;
-  border-radius: 4px;
-}
-
-.menu-modal .submit {
-  border-radius: 12px;
-  color: #000;
-  margin-top: var(--spacing-medium);
-}
-
-.menu-modal .submit, .menu-modal .submit:hover {
-  background-color: var(--siege) !important;
-}
-
-.menu-modal .submit:hover {
-  filter: brightness(1.05) !important;
-}
-
-.menu-modal .options .checkbox .icon_component {
-  color: var(--dark-green);
-  width: 30px;
-}
-
-.menu-modal .options .checkbox .monday-style-checkbox__checkbox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent !important;
-}
-
-.menu-modal .options .checkbox .monday-style-checkbox__checkbox:after {
-  transition: none;
-}
-
-.menu-modal .options .monday-style-toggle_toggle {
-  transform: scale(0.8);
-  margin-left: 0;
-}
-
-.menu-modal .options .monday-style-toggle_wrapper {
-  gap: 0.22rem;
-  justify-self: flex-end;
-}
-
-.menu-modal .options .monday-style-toggle_wrapper, .menu-modal .options .monday-style-checkbox__label {
-  font-size: 13px;
-}
-
-.menu-modal .options .monday-style-toggle_toggle--selected {
-  filter: brightness(2.5);
-}
-
-.menu-modal .options .monday-style-toggle_toggle--not-selected::after {
-  left: -5px !important;
-}
-
-.menu-modal .options .monday-style-toggle_toggle--selected::after {
-  left: 28px !important;
-}
-
-.menu-modal .toggle {
-  background-color: transparent;
-  border: 1px solid var(--dark-green);
-  height: 1rem;
-}
-
-.menu-modal .toggle::after {
-  transform: scale(1.2);
-  background-color: var(--dark-green);
 }
 
 .scroller::-webkit-scrollbar {
