@@ -5,6 +5,8 @@
 ![npm version](https://img.shields.io/github/package-json/v/marvjohnson/green-works)
 ![license shield](https://img.shields.io/github/license/MarvJohnson/Green-Works)
 
+## Description
+
 Green Works is an app built for [Monday](https://www.monday.com), during a hackathon. It's purpose is to track sustainable practices while incentivizing engagement in the digital workplace.
 
 </br>
