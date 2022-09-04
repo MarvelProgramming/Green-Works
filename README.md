@@ -63,5 +63,5 @@ The app is designed to fit comfortably within the workspace, and dynamically adj
 - Briana Van Slyck | [LinkedIn](https://www.linkedin.com/in/brianavanslyck/)
 - Brandon Cespedes | [LinkedIn](https://www.linkedin.com/in/brandon-cespedes/)
 - Nefertiti Bourne | [LinkedIn](https://www.linkedin.com/in/nefertitibourne/)
-- Kai Tsehay | [LinkedIn]()
+- Kai Tsehay | [LinkedIn](https://www.linkedin.com/in/kaiwashington/)
 - Marvel Johnson | [LinkedIn](https://www.linkedin.com/in/marvel-johnson/)
