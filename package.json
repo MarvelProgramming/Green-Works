@@ -1,5 +1,6 @@
 {
   "name": "green-works",
+  "description": "An app for tracking sustainable practices while incentivizing engagement in the digital workplace.",
   "version": "4.0.0",
   "private": true,
   "scripts": {
