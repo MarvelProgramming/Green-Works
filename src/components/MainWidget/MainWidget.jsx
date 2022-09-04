@@ -100,10 +100,6 @@ export default function MainWidget() {
           handleCloseSettingsMenu={handleCloseTasksMenu}
           handleOpenSettingsMenu={handleOpenSettingsMenu}
         />
-        <WidgetSettingsMenu
-          settingsMenuAnimation={settingsMenuAnimation}
-          handleCloseSettingsMenu={handleCloseSettingsMenu}
-        />
       </div>
     </Box>
   );
