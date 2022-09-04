@@ -1,6 +1,6 @@
 {
-  "name": "monday-integration-quickstart-app",
-  "version": "0.0.1",
+  "name": "green-works",
+  "version": "4.0.0",
   "private": true,
   "scripts": {
     "start": "npm run stop && concurrently \"npm run server\" \"npm run expose\"",
