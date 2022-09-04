@@ -1,0 +1,66 @@
+.goal-progress-bar {
+  padding: var(--spacing-small);
+}
+
+.goal-progress-bar .progress-praise * {
+  flex: 1;
+}
+
+.goal-progress-bar .progress-praise:nth-child(1) * {
+  text-align: right;
+}
+
+.goal-progress-bar .progress-praise:nth-child(3) * {
+  text-align: center;
+}
+
+.goal-progress-bar .progress-praise:nth-child(1) p:nth-child(2) {
+  text-align: center;
+}
+
+.goal-progress-bar .progress-praise p {
+  margin: 0;
+}
+
+.goal-progress-bar .progress-praise.top p {
+  margin-bottom: 0.5rem;
+}
+
+.goal-progress-bar .progress-praise.bottom p {
+  margin-top: 0.2rem;
+}
+
+.progress-area {
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+  border-radius: 5px;
+  width: 35rem;
+  height: 3rem;
+  overflow: hidden;
+  background-color: #fff;
+  border: 0.2rem solid #fff;
+  box-shadow: var(--box-shadow-small)
+}
+
+.goal-progress-bar .progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+
+.goal-progress-bar .divider {
+  flex: 1;
+  height: 100%;
+  z-index: 1;
+}
+
+.goal-progress-bar .divider:not(:last-child) {
+  border-right: 0.3rem solid white;
+}
+
+[role="progressbar"] {
+  background-color: var(--dark-mint) !important;
+  transition: width 2s ease-in-out !important;
+}

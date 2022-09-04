@@ -1,0 +1,14 @@
+.appreciation-text {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 0;
+  transform: translateX(1rem);
+}
+
+.earth-svg {
+  display: inline;
+  outline: none;
+  transform: scale(1.2);
+  cursor: initial;
+}

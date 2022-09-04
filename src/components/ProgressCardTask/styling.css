@@ -1,0 +1,15 @@
+.progress-card-task {
+  padding: 0 var(--spacing-small);
+}
+
+.progress-card-task:nth-of-type(5) {
+  border-radius: 0 0 4px 4px;
+}
+
+.progress-card-task p {
+  margin: 0;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

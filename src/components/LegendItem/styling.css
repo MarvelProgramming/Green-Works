@@ -1,0 +1,10 @@
+.legend-item {
+  display: flex;
+  gap: var(--spacing-small);
+  align-items: center;
+}
+
+.legend-item .color-indicator {
+  padding: calc(var(--spacing-small) - 2px) var(--spacing-medium);
+  border-radius: 3px;
+}

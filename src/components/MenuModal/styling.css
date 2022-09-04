@@ -1,0 +1,40 @@
+.menu-modal, .menu-modal *:not(.icon_component, .icon_component *) {
+  visibility: hidden;
+}
+
+@keyframes slide-in-from-top {
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.menu-modal.slide-in-from-top, .menu-modal.fade-in {
+  opacity: 0;
+}
+
+.menu-modal.slide-in-from-top, .menu-modal.fade-in, .menu-modal.fade-out,
+.menu-modal.slide-in-from-top *:not(.icon_component, .icon_component *), .menu-modal.fade-in *:not(.icon_component, .icon_component *), .menu-modal.fade-out *:not(.icon_component, .icon_component *) {
+  visibility: visible;
+}
+
+.menu-modal.slide-in-from-top {
+  transform: translateY(-2rem);
+  animation: slide-in-from-top 0.5s forwards 0s ease-out;
+}
+
+.menu-modal.fade-in {
+  animation: fade-in 0.5s forwards 0s ease-out;
+}
+
+.menu-modal.fade-out, .menu-modal.fade-out * {
+  animation: fade-out 0.5s forwards 0s ease-out;
+}
+
+.menu-modal .options-container {
+  max-height: 110px;
+}
+
+.menu-modal .options-container.scroller {
+  overflow-y: scroll;
+}

@@ -1,0 +1,427 @@
+:root {
+  --dark-green: #055425;
+  --light-mint: #dee5e5;
+  --siege: #9dc5bb;
+  --mint: #17b890;
+  --dark-mint: #00C874;
+  --black: #000;
+  --supernova-yellow: #FFB02E;
+  --hemoglobin-red: #EE0808;
+  --light-grey: #D1D1D1;
+  --super-light-grey: #F2F2F2;
+  --suva-grey: #8A8A8A;
+}
+
+:root {
+  --add-task-action-height: 32px;
+  --modal-width: 250px;
+  --progress-card-width: 192px;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  /* width: 100vw; */
+  padding-top: var(--spacing-large);
+  box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+.header-01 {
+  font-family: 'Roboto' !important;
+  font-size: 55px !important;
+  font-weight: 600 !important;
+  font-stretch: normal !important;
+  font-style: normal !important;
+  line-height: 1.16 !important;
+  letter-spacing: 0.55px !important;
+}
+
+.header-02 {
+  font-family: 'Roboto' !important;
+  font-size: 48px !important;
+  font-weight: 600 !important;
+  font-stretch: normal !important;
+  font-style: normal !important;
+  line-height: 1.17 !important;
+  letter-spacing: 0.48px !important;
+}
+
+.header-03 {
+  font-family: 'Roboto' !important;
+  font-size: 42px !important;
+  font-weight: 600;
+  font-stretch: normal !important;
+  font-style: normal !important;
+  line-height: 1.19 !important;
+  letter-spacing: 0.42px !important;
+}
+
+.header-04 {
+  font-family: 'Roboto' !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  font-stretch: normal !important;
+  font-style: normal !important;
+  line-height: 1.22 !important;
+  letter-spacing: 0.36px !important;
+}
+
+.header-05 {
+  font-family: 'Roboto' !important;
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  font-stretch: normal !important;
+  font-style: normal !important;
+  line-height: 1.29 !important;
+  letter-spacing: normal !important;
+}
+
+.button-01 {
+  font-family: 'Roboto';
+  font-size: 18px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.56;
+  letter-spacing: 0.36px;
+}
+
+.button-02 {
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: 0.32px;
+}
+
+.body-text-01 {
+  font-family: 'Roboto';
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.56;
+  letter-spacing: normal;
+}
+
+.body-text-02 {
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+
+.body-text-03 {
+  font-family: 'Roboto';
+  font-size: 12px;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.input-body-text-03::placeholder, input[type="text"].input-body-text-03 {
+  font-family: 'Roboto' !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  font-stretch: normal !important;
+  font-style: normal !important;
+  line-height: 1.67 !important;
+  letter-spacing: normal !important;
+}
+
+.App .main {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-template-rows: auto;
+  grid-template-areas:
+    ". widget"
+    ". legend"
+    "prog cards-top-row"
+    "cards-bottom-row cards-bottom-row";
+  padding: calc(var(--spacing-large) + 1rem);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.App .main .legend {
+  grid-area: legend;
+}
+
+.App .main .goal-progress-area {
+  grid-area: prog;
+  justify-self: end;
+  margin-right: 5rem;
+}
+
+.App .main .top-row {
+  grid-area: cards-top-row;
+}
+
+.App .main .bottom-row, .App .main .all-row {
+  grid-template-columns: repeat(5, var(--progress-card-width));
+  gap: calc(var(--spacing-large) + 10px);
+  justify-content: end;
+  grid-area: cards-bottom-row;
+  overflow: visible;
+}
+
+.App .main .bottom-row {
+  display: grid;
+}
+
+.App .main .all-row {
+  display: none;
+}
+
+.menu-modal {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  grid-template-areas: 
+    "header"
+    "submit";
+  position: absolute;
+  width: var(--modal-width);
+  top: 2.7rem;
+  right: 2.7rem;
+  transform-origin: top right;
+  background-color: var(--light-mint) !important;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 3px var(--light-mint) !important;
+  gap: var(--spacing-medium);
+  padding-bottom: var(--spacing-small);
+}
+
+.menu-modal form {
+  display: grid;
+  gap: var(--spacing-small);
+  grid-area: submit;
+}
+
+.menu-modal .header .heading {
+  color: var(--dark-green);
+  grid-area: header;
+  margin: 0;
+}
+
+.menu-modal .header .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.menu-modal .header .icon {
+  outline: none;
+}
+
+.menu-modal .options {
+  justify-self: start;
+}
+
+.menu-modal .options .checkbox > div {
+  border: 1px solid var(--dark-green) !important;
+  border-radius: 4px;
+}
+
+.menu-modal .submit {
+  border-radius: 12px;
+  color: #000;
+  margin-top: var(--spacing-medium);
+}
+
+.menu-modal .submit, .menu-modal .submit:hover {
+  background-color: var(--siege) !important;
+}
+
+.menu-modal .submit:hover {
+  filter: brightness(1.05) !important;
+}
+
+.menu-modal .options .checkbox .icon_component {
+  color: var(--dark-green);
+  width: 30px;
+}
+
+.menu-modal .options .checkbox .monday-style-checkbox__checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent !important;
+}
+
+.menu-modal .options .checkbox .monday-style-checkbox__checkbox:after {
+  transition: none;
+}
+
+.menu-modal .options .monday-style-toggle_toggle {
+  transform: scale(0.8);
+  margin-left: 0;
+}
+
+.menu-modal .options .monday-style-toggle_wrapper {
+  gap: 0.22rem;
+  justify-self: flex-end;
+}
+
+.menu-modal .options .monday-style-toggle_wrapper, .menu-modal .options .monday-style-checkbox__label {
+  font-size: 13px;
+}
+
+.menu-modal .options .monday-style-toggle_toggle--selected {
+  filter: brightness(2.5);
+}
+
+.menu-modal .options .monday-style-toggle_toggle--not-selected::after {
+  left: -5px !important;
+}
+
+.menu-modal .options .monday-style-toggle_toggle--selected::after {
+  left: 28px !important;
+}
+
+.menu-modal .toggle {
+  background-color: transparent;
+  border: 1px solid var(--dark-green);
+  height: 1rem;
+}
+
+.menu-modal .toggle::after {
+  transform: scale(1.2);
+  background-color: var(--dark-green);
+}
+
+.scroller::-webkit-scrollbar {
+  width: 2px;
+}
+
+.scroller::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 12px;
+}
+
+.scroller::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.green {
+  background-color: var(--dark-mint);
+}
+
+.yellow {
+  background-color: var(--supernova-yellow);
+}
+
+.red {
+  background-color: var(--hemoglobin-red);
+}
+
+.grey {
+  background-color: var(--light-grey);
+}
+
+@media screen and (max-width: 1200px) {
+  .App .main {
+    grid-template-areas:
+      ". widget"
+      "prog prog"
+      ". legend"
+      "cards-bottom-row cards-bottom-row";
+  }
+
+  .App .main .goal-progress-area {
+    justify-self: center;
+    margin-right: 0;
+  }
+
+  .App .main .top-row {
+    display: none;
+  }
+  
+  .App .main .bottom-row {
+    display: none;
+  }
+
+  .App .main .all-row {
+    display: grid;
+    grid-template-columns: repeat(4, var(--progress-card-width));
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    visibility: visible;
+    opacity: 0;
+  }
+  
+  100% {
+    opacity: 1;
+    z-index: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media screen and (max-width: 970px) {
+  .App .main {
+    grid-template-areas:
+      ". widget"
+      "prog prog"
+      "legend legend"
+      "cards-bottom-row cards-bottom-row";
+  }
+
+  .App .main .all-row {
+    grid-template-columns: repeat(3, var(--progress-card-width));
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .App .main {
+    grid-template-areas:
+      ". widget"
+      "prog prog"
+      "legend legend"
+      "cards-bottom-row cards-bottom-row";
+  }
+
+  .App .main .all-row {
+    justify-content: center;
+    gap: var(--spacing-xxxl);
+    grid-template-columns: repeat(2, var(--progress-card-width));
+  }
+}

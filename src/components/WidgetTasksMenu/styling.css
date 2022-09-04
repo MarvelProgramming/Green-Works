@@ -1,0 +1,8 @@
+.options {
+  width: 100%;
+}
+
+.notify-text {
+  width: max-content;
+  margin: 0 auto;
+}

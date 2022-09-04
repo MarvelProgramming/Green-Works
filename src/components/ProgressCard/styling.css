@@ -1,0 +1,114 @@
+:root {
+  --border-width: 2px;
+}
+
+.progress-card {
+  width: 12rem;
+  height: 237px;
+  justify-self: flex-end !important;
+  box-shadow: var(--box-shadow-small);
+  margin-bottom: var(--spacing-large);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.progress-card.current-user {
+  border: 1px dashed var(--light-grey);
+}
+
+.progress-card .avatar-area {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium);
+  padding: 0 var(--spacing-medium);
+  padding-top: var(--spacing-medium);
+  overflow: visible;
+}
+
+.progress-card .avatar-area p, .progress-card .avatar-area .avatar {
+  display: inline-block;
+}
+
+.progress-card .avatar-area p {
+  width: 5rem;
+  line-height: var(--spacing-large);
+}
+
+.progress-card .avatar-area .avatar {
+  border-radius: 50%;
+  transform: scale(1.2);
+}
+
+.progress-card .avatar-area .avatar.green {
+  border: var(--border-width) solid var(--dark-mint);
+}
+
+.progress-card .avatar-area .avatar.yellow {
+  border: var(--border-width) solid var(--supernova-yellow);
+}
+
+.progress-card .avatar-area .avatar.red {
+  border: var(--border-width) solid var(--hemoglobin-red);
+}
+
+.progress-card .avatar-area .avatar.grey {
+  border: var(--border-width) solid var(--light-grey);
+}
+
+.progress-card .add-task-input {
+  border: none !important;
+  background-color: var(--super-light-grey) !important;
+  padding-left: var(--spacing-small) !important;
+}
+
+.progress-card .interaction-area {
+  position: relative;
+  overflow: visible;
+}
+
+.progress-card .add-task-call-to-action, .progress-card .add-task-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress-card .add-task-call-to-action {
+  width: 100%;
+}
+
+.progress-card .add-task-call-to-action.fade-in, .progress-card .add-task-input.fade-in {
+  animation: fade-in 0.5s forwards 0s ease-out;
+}
+
+.progress-card .add-task-call-to-action.fade-out, .progress-card .add-task-input.fade-out {
+  animation: fade-out 0.5s forwards 0s ease-out;
+}
+
+.progress-card .add-task-call-to-action p {
+  font-size: 14px;
+  margin: 0;
+  color: var(--suva-grey);
+}
+
+.progress-card .task-area, .progress-card .task-list {
+  gap: 0.2rem !important;
+}
+
+.progress-card .task-area {
+  margin-top: var(--spacing-medium);
+  padding: 0 var(--spacing-small);
+  padding-bottom: var(--spacing-small);
+}
+
+.progress-card .task-list-container.scroller {
+  overflow-y: scroll;
+  height: 110px;
+}
+
+.progress-card .task-list {
+  padding-right: calc(var(--spacing-small) - 6px);
+}
+
+.progress-card .add-task-input, .progress-card .add-task-call-to-action {
+  height: var(--add-task-action-height);
+}
