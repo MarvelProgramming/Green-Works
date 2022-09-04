@@ -12,8 +12,6 @@ Green Works is an app built for [Monday](https://www.monday.com), during a hacka
 
 ## Project Dependencies
 
----
-
 - [React](https://reactjs.org/) for the frontend
 - The [Monday Vibe Design System](https://style.monday.com/) for styling guidlines and components
 - The [Monday GraphQL API](https://developer.monday.com/api-reference/docs) for querying user data
@@ -24,16 +22,12 @@ Green Works is an app built for [Monday](https://www.monday.com), during a hacka
 
 ## Overview
 
----
-
 Users visit [Monday.com](https://www.monday.com), navigate to a workspace, and create a new board (installing Green Works from the [app marketplace](https://monday.com/marketplace)). Teams may then configure a monthly point goal, setup tasks, collaborate, and more.
 
 </br>
 </br>
 
 ## Features
-
----
 
 A sleek way to track your team's progress towards monthly goals.
 
@@ -63,8 +57,6 @@ The app is designed to fit comfortably within the workspace, and dynamically adj
 </br>
 
 ## Credits
-
----
 
 - Briana Van Slyck | [LinkedIn](https://www.linkedin.com/in/brianavanslyck/)
 - Brandon Cespedes | [LinkedIn](https://www.linkedin.com/in/brandon-cespedes/)
