@@ -13,7 +13,6 @@ import {
   getCurrentMondayUser,
   getMondayUsers,
   getMondayUserSaveData,
-  getMondayContext,
   getMondayFilter,
   saveMondayUserData,
   getMondaySettings,
@@ -30,7 +29,6 @@ export default function App() {
   const [progress, setProgress] = useState(0);
   const [currentUser, setCurrentUser] = useState(userDefaultSettings.value);
   const [mondaySettings, setMondaySettings] = useState({});
-  const [mondayContext, setMondayContext] = useState({ theme: 'dark' });
   const [mondayFilter, setMondayFilter] = useState('');
   const [configuringMondaySettings, setConfiguringMondaySettings] =
     useState(false);
@@ -38,7 +36,6 @@ export default function App() {
   useEffect(() => {
     setupUsers();
     setupMondaySettings();
-    setupMondayContext();
     setupMondayFilter();
   }, []);
 
@@ -165,17 +162,6 @@ export default function App() {
   }
 
   /**
-   * Gets the context for Green Works from the monday api and sets it as the mondayContext state.
-   */
-  async function setupMondayContext() {
-    const resMondayContext = await getMondayContext();
-
-    const newMondayContext = Object.assign({ theme: 'dark' }, resMondayContext);
-
-    setMondayContext(newMondayContext);
-  }
-
-  /**
    * Gets the current filter settings the user has on monday and sets it as the mondayFilter state, and also
    * sets up a listener for any future changes to update the state.
    */
@@ -263,7 +249,7 @@ export default function App() {
   }
 
   return (
-    <div className="App" data-theme={mondayContext.theme}>
+    <div className="App">
       <Box
         className={`main ${configuringMondaySettings ? 'fade-out' : 'fade-in'}`}
       >
