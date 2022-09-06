@@ -130,6 +130,10 @@ export async function setMondaySettings(newSettings) {
   }
 }
 
+/**
+ * Makes an api call to monday, getting the user's current filter.
+ * @returns A string containing the user's filter on monday, or an empty string if the api call failed.
+ */
 export async function getMondayFilter() {
   try {
     const res = await monday.get('filter');
@@ -138,9 +142,9 @@ export async function getMondayFilter() {
 
     return mondayFilter;
   } catch (err) {
-    console.log("Couldn't get monday settings! Returned empty object", err);
+    console.log("Couldn't get monday settings! Returned empty string", err);
 
-    return null;
+    return '';
   }
 }
 
