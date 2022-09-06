@@ -84,7 +84,9 @@ export async function getMondayContext() {
   try {
     const res = await monday.get('context');
 
-    return res;
+    const mondayContext = res.data;
+
+    return mondayContext;
   } catch (err) {
     console.log("Couldn't get monday context! Returned null", err);
 
