@@ -35,7 +35,7 @@
   animation: main-widget-bounce 0.5s ease-out calc(0.5s + var(--widget-animation-delay-offset)) forwards;
   grid-area: widget;
   justify-self: right;
-  z-index: 2;
+  z-index: 3;
   overflow: visible;
 }
 
@@ -53,6 +53,7 @@
   height: 100%;
   right: 1.55rem;
   overflow: hidden;
+  pointer-events: none;
 }
 
 @keyframes widget-slide-in {
