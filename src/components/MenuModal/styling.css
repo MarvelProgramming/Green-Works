@@ -1,3 +1,22 @@
+.menu-modal {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  grid-template-areas: 
+    "header"
+    "submit";
+  position: absolute;
+  width: var(--modal-width);
+  top: 2.7rem;
+  right: 2.7rem;
+  transform-origin: top right;
+  background-color: var(--secondary-bg-color) !important;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 3px var(--secondary-bg-color) !important;
+  gap: var(--spacing-medium);
+  padding-bottom: var(--spacing-small);
+}
+
 .menu-modal, .menu-modal *:not(.icon_component, .icon_component *) {
   visibility: hidden;
 }
@@ -37,4 +56,101 @@
 
 .menu-modal .options-container.scroller {
   overflow-y: scroll;
+}
+
+.menu-modal form {
+  display: grid;
+  gap: var(--spacing-small);
+  grid-area: submit;
+}
+
+.menu-modal .header .heading {
+  color: var(--header-text-color1);
+  grid-area: header;
+  margin: 0;
+}
+
+.menu-modal .header .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.menu-modal .header .icon {
+  outline: none;
+}
+
+.menu-modal .options {
+  justify-self: start;
+}
+
+.menu-modal .options .checkbox > div {
+  border: 1px solid var(--dark-green) !important;
+  border-radius: 4px;
+}
+
+.menu-modal .submit {
+  border-radius: 12px;
+  color: #000;
+  margin-top: var(--spacing-medium);
+}
+
+.menu-modal .submit, .menu-modal .submit:hover {
+  background-color: var(--siege) !important;
+}
+
+.menu-modal .submit:hover {
+  filter: brightness(1.05) !important;
+}
+
+.menu-modal .options .checkbox .icon_component {
+  color: var(--dark-green);
+  width: 30px;
+}
+
+.menu-modal .options .checkbox .monday-style-checkbox__checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent !important;
+}
+
+.menu-modal .options .checkbox .monday-style-checkbox__checkbox:after {
+  transition: none;
+}
+
+.menu-modal .options .monday-style-toggle_toggle {
+  transform: scale(0.8);
+  margin-left: 0;
+}
+
+.menu-modal .options .monday-style-toggle_wrapper {
+  gap: 0.22rem;
+  justify-self: flex-end;
+}
+
+.menu-modal .options .monday-style-toggle_wrapper, .menu-modal .options .monday-style-checkbox__label {
+  font-size: 13px;
+}
+
+.menu-modal .options .monday-style-toggle_toggle--selected {
+  filter: brightness(2.5);
+}
+
+.menu-modal .options .monday-style-toggle_toggle--not-selected::after {
+  left: -5px !important;
+}
+
+.menu-modal .options .monday-style-toggle_toggle--selected::after {
+  left: 28px !important;
+}
+
+.menu-modal .toggle {
+  background-color: transparent;
+  border: 1px solid var(--dark-green);
+  height: 1rem;
+}
+
+.menu-modal .toggle::after {
+  transform: scale(1.2);
+  background-color: var(--dark-green);
 }

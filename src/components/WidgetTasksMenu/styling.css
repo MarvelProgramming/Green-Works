@@ -3,6 +3,7 @@
 }
 
 .notify-text {
+  color: var(--body-txt-color1);
   width: max-content;
   margin: 0 auto;
 }

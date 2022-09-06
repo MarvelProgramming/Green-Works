@@ -77,6 +77,22 @@ export async function saveMondayUserData(user) {
 }
 
 /**
+ * Makes a call to the monday api to get the app's current context.
+ * @returns - An object containing "information about where this app is currently displayed, depending on the type of feature".
+ */
+export async function getMondayContext() {
+  try {
+    const res = await monday.get('context');
+
+    return res;
+  } catch (err) {
+    console.log("Couldn't get monday context! Returned null", err);
+
+    return null;
+  }
+}
+
+/**
  * Makes a call to the monday api to fetch the settings for Green Works.
  * @returns - The settings for Green Works on monday.
  */
