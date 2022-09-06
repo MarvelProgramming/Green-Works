@@ -17,7 +17,7 @@ export default {
         }
       ],
       photo_thumb_small: '',
-      is_admin: false
+      is_admin: true
     };
   }
 };

@@ -249,11 +249,12 @@ export default function App() {
       >
         {currentUser.is_admin && (
           <Button
-            className="configure submit"
+            className="configure"
             onClick={() => setConfiguringMondaySettings(true)}
+            kind={Button.kinds.TERTIARY}
             disabled={configuringMondaySettings}
           >
-            Admin
+            Modify Board
           </Button>
         )}
         <CurrentUserContext.Provider

@@ -192,8 +192,26 @@ body {
 }
 
 .App .main button.configure {
-  width: 10rem;
   min-width: unset;
+  width: min-content;
+  height: 2rem;
+  color: #001AFF;
+  grid-area: widget;
+  justify-self: end;
+  transform: translateX(calc(var(--spacing-xl) * -1 - 2.7rem)) translateY(calc(var(--spacing-large)));
+}
+
+button.configure:hover {
+  background-color: transparent !important;
+  filter: brightness(2);
+}
+
+[data-theme="dark"] button.configure {
+  filter: brightness(10);
+}
+
+[data-theme="dark"] button.configure:hover {
+  filter: brightness(7);
 }
 
 .App .main .legend {
