@@ -4,32 +4,35 @@ import 'monday-ui-react-core/dist/main.css';
 import GoalProgressArea from './components/GoalProgressArea/GoalProgressArea';
 import ProgressCardList from './components/ProgressCardList/ProgressCardList';
 import Box from 'monday-ui-react-core/dist/Box';
+import Button from 'monday-ui-react-core/dist/Button';
 import LegendList from './components/LegendList/LegendList';
 import MainWidget from './components/MainWidget/MainWidget';
+import AdminSetupMenu from './components/AdminSetupMenu/AdminSetupMenu';
 import CurrentUserContext from './contexts/CurrentUserContext';
 import {
-  getCurrentMondayUserID,
+  getCurrentMondayUser,
   getMondayUsers,
   getMondayUserSaveData,
-  saveMondayUserData
+  saveMondayUserData,
+  getMondaySettings,
+  setMondaySettings as setRemoteMondaySettings,
+  listenForMondaySettingsChange
 } from './services/monday';
+import mondayDefaultSettings from './data/mondayDefaultSettings';
+import userDefaultSettings from './data/userDefaultSettings';
 
 export default function App() {
   // I'm setting the initial state this way for local testing. All of this is overridden in production.
   const [users, setUsers] = useState([]);
   const [progress, setProgress] = useState(0);
-  const [currentUser, setCurrentUser] = useState({
-    id: -1,
-    name: '',
-    tasks: [],
-    settings: [],
-    photo_thumb_small: ''
-  });
-  // TODO: Setup to be confiurable with whatever the group decides on UI wise.
-  const [currentGoal, setCurrentGoal] = useState('a four day work week');
+  const [currentUser, setCurrentUser] = useState(userDefaultSettings.value);
+  const [mondaySettings, setMondaySettings] = useState({});
+  const [configuringMondaySettings, setConfiguringMondaySettings] =
+    useState(false);
 
   useEffect(() => {
     setupUsers();
+    setupMondaySettings();
   }, []);
 
   /**
@@ -45,49 +48,18 @@ export default function App() {
     } else {
       newUsers = [];
 
-      for (let i = 1; i <= 100; i++) {
-        const newUser = {
+      for (let i = 1; i <= 11; i++) {
+        const newUser = Object.assign(userDefaultSettings.value, {
           id: i,
-          name: i % 2 === 0 ? 'John Doe' : 'Jain Doe',
-          photo_thumb_small:
-            'https://files.monday.com/use1/photos/33741361/thumb_small/33741361-user_photo_initials_2022_08_29_23_51_13.png?1661817073',
-          tasks: [],
-          settings: [
-            {
-              label: 'Disable notifications for 8 hours',
-              status: false,
-              toggle: false
-            },
-            {
-              label: 'Disable all notifications',
-              status: false,
-              toggle: false
-            }
-          ]
-        };
+          name: i % 2 === 0 ? 'John Doe' : 'Jain Doe'
+        });
 
         newUsers.push(newUser);
       }
 
-      const testCurrentUser = {
-        id: -1,
-        name: 'John Doe',
-        photo_thumb_small:
-          'https://files.monday.com/use1/photos/33741361/thumb_small/33741361-user_photo_initials_2022_08_29_23_51_13.png?1661817073',
-        tasks: [],
-        settings: [
-          {
-            label: 'Disable notifications for 8 hours',
-            status: false,
-            toggle: false
-          },
-          {
-            label: 'Disable all notifications',
-            status: false,
-            toggle: false
-          }
-        ]
-      };
+      const testCurrentUser = Object.assign(userDefaultSettings.value, {
+        id: -1
+      });
 
       newUsers.push(testCurrentUser);
     }
@@ -101,16 +73,22 @@ export default function App() {
    * Gets the active monday user, updates the currentUser state, and places the active user first in the progress card list.
    */
   async function setupCurrentUser(users) {
-    let currentMondayUserID = await getCurrentMondayUserID();
-    let currentMondayUser;
-
+    const currentMondayUser = await getCurrentMondayUser();
+    let newCurrentMondayUser;
     // Used in testing to find a premade 'current user'.
-    if (currentMondayUserID)
-      currentMondayUser = users.find((user) => user.id === currentMondayUserID);
-    else currentMondayUser = users.find((user) => user.id === -1);
+    if (currentMondayUser.id)
+      newCurrentMondayUser = users.find(
+        (user) => user.id === currentMondayUser.id
+      );
+    else newCurrentMondayUser = users.find((user) => user.id === -1);
 
-    setCurrentUser(currentMondayUser);
-    return currentMondayUser;
+    newCurrentMondayUser = Object.assign(
+      newCurrentMondayUser,
+      currentMondayUser
+    );
+
+    setCurrentUser(newCurrentMondayUser);
+    return newCurrentMondayUser;
   }
 
   /**
@@ -130,28 +108,53 @@ export default function App() {
    * @returns - an object with the user's monday data and Green Works save data (located in monday's storage database) combined.
    */
   async function getMergedUserSaveData(user) {
-    const userSaveDataRes = getMondayUserSaveData(user.id);
+    const userSaveDataRes = await getMondayUserSaveData(user.id);
 
+    // Replaces the default settings with ones that were fetched from monday.
     const userSaveData = Object.assign(
-      {
-        tasks: [],
-        settings: [
-          {
-            label: 'Disable notifications for 8 hours',
-            status: false,
-            toggle: false
-          },
-          {
-            label: 'Disable all notifications',
-            status: false,
-            toggle: false
-          }
-        ]
-      },
+      userDefaultSettings.value,
       userSaveDataRes
     );
+    // Merges the userSaveData and user object, favoring user properties if there are any common keys.
+    const mergedUserSaveData = Object.assign(userSaveData, user);
 
-    return { ...user, ...userSaveData };
+    return mergedUserSaveData;
+  }
+
+  /**
+   * Sets up the settings listener, as well as grabs the most up-to-date settings from the monday api and sets
+   * it as the current state.
+   */
+  async function setupMondaySettings() {
+    const resMondaySettings = await getMondaySettings();
+
+    updateMondaySettings(resMondaySettings);
+
+    listenForMondaySettingsChange(updateMondaySettings);
+  }
+
+  /**
+   * Updates the local monday settings state and calls the monday api to update it remotely as well.
+   * @param {object} newSettings - The most up-to-date monday settings for Green Works.
+   */
+  async function setMondaySettingsAndRemote(newSettings) {
+    const updatedMondaySettings = await setRemoteMondaySettings(newSettings);
+
+    updateMondaySettings(updatedMondaySettings);
+  }
+
+  /**
+   * Takes the most up-to-date monday settings for Green Works and updates the current state with them, or uses
+   * the default settings if none were provided.
+   * @param {object} updatedMondaySettings - An object with all the most up-to-date monday settings for Green Works.
+   */
+  function updateMondaySettings(updatedMondaySettings) {
+    const newMondaySettings = Object.assign(
+      mondayDefaultSettings.value,
+      updatedMondaySettings
+    );
+
+    setMondaySettings(newMondaySettings);
   }
 
   /**
@@ -227,18 +230,42 @@ export default function App() {
 
   return (
     <div className="App">
-      <Box className="main">
+      <Box
+        className={`main ${configuringMondaySettings ? 'fade-out' : 'fade-in'}`}
+      >
+        {currentUser.is_admin && (
+          <Button
+            className="configure submit"
+            onClick={() => setConfiguringMondaySettings(true)}
+            disabled={configuringMondaySettings}
+          >
+            Admin
+          </Button>
+        )}
         <CurrentUserContext.Provider
           value={{ data: currentUser, updateUserTasks, updateUserSettings }}
         >
           <MainWidget />
           <LegendList />
-          <GoalProgressArea progress={progress} currentGoal={currentGoal} />
+          <GoalProgressArea
+            progress={progress}
+            teamGoal={mondaySettings.teamGoal}
+          />
           <ProgressCardList
             users={users}
             updateGoalProgressBar={updateGoalProgressBar}
           />
         </CurrentUserContext.Provider>
+      </Box>
+      <Box
+        className={`admin-setup-menu-container ${
+          configuringMondaySettings ? 'fade-in' : 'fade-out'
+        }`}
+      >
+        <AdminSetupMenu
+          setMondaySettingsAndRemote={setMondaySettingsAndRemote}
+          setConfiguringMondaySettings={setConfiguringMondaySettings}
+        />
       </Box>
     </div>
   );

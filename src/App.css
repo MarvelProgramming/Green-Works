@@ -159,8 +159,14 @@ body {
     "prog cards-top-row"
     "cards-bottom-row cards-bottom-row";
   padding: calc(var(--spacing-large) + 1rem);
+  padding-bottom: 0;
   max-width: 1400px;
   margin: 0 auto;
+}
+
+.App .main button.configure {
+  width: 10rem;
+  min-width: unset;
 }
 
 .App .main .legend {
@@ -237,39 +243,43 @@ body {
   justify-self: start;
 }
 
-.menu-modal .options .checkbox > div {
+button.submit {
+  border-radius: 12px;
+  color: var(--dark-green);
+}
+
+.menu-modal .submit {
+  margin-top: var(--spacing-medium);
+}
+
+button.submit, button.submit:hover {
+  background-color: var(--siege) !important;
+  transition: filter 0.2s ease-out;
+}
+
+button.submit:hover {
+  filter: brightness(1.05) !important;
+}
+
+.checkbox > div {
   border: 1px solid var(--dark-green) !important;
   border-radius: 4px;
 }
 
-.menu-modal .submit {
-  border-radius: 12px;
-  color: #000;
-  margin-top: var(--spacing-medium);
-}
-
-.menu-modal .submit, .menu-modal .submit:hover {
-  background-color: var(--siege) !important;
-}
-
-.menu-modal .submit:hover {
-  filter: brightness(1.05) !important;
-}
-
-.menu-modal .options .checkbox .icon_component {
+.monday-style-checkbox__icon.icon_component {
   color: var(--dark-green);
   width: 30px;
 }
 
-.menu-modal .options .checkbox .monday-style-checkbox__checkbox {
+.monday-style-checkbox__checkbox {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: transparent !important;
 }
 
-.menu-modal .options .checkbox .monday-style-checkbox__checkbox:after {
-  transition: none;
+.monday-style-checkbox__checkbox:after {
+  transition: none !important;
 }
 
 .menu-modal .options .monday-style-toggle_toggle {
