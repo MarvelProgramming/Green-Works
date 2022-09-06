@@ -287,7 +287,16 @@ export default function App() {
             teamGoal={mondaySettings.teamGoal}
           />
           <ProgressCardList
-            users={users}
+            users={
+              mondayFilter.length > 0
+                ? users.filter((user) =>
+                    user.name
+                      .split(' ')[0]
+                      .toLowerCase()
+                      .includes(mondayFilter.toLowerCase())
+                  )
+                : users
+            }
             updateGoalProgressBar={updateGoalProgressBar}
           />
         </CurrentUserContext.Provider>
