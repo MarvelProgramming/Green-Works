@@ -89,14 +89,6 @@ export default function WidgetTasksMenu({
       submitDisabled={currentUser.data.tasks.length === 0}
       handleSubmit={handleSubmit}
       handleClose={handleClose}
-      extraHeadingIcons={
-        <Icon
-          className="icon"
-          iconType={Icon.type.SRC}
-          icon={SettingsIcon}
-          onClick={handleOpenSettings}
-        />
-      }
     >
       {getInteractionComponent()}
     </MenuModal>
