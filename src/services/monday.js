@@ -2,14 +2,14 @@ import mondaySdk from 'monday-sdk-js';
 const monday = mondaySdk();
 
 /**
- * Makes a call to the monday api to grab and return the active user's id.
- * @returns A number that uniquely identifies the current monday user.
+ * Makes a call to the monday api to grab and return the active user's id and admin status.
+ * @returns An object containing the number that uniquely identifies the monday user as well as a boolean representing their admin status.
  */
-export async function getCurrentMondayUserID() {
+export async function getCurrentMondayUser() {
   try {
-    const res = await monday.api(`query { me { id } }`);
+    const res = await monday.api(`query { me { id, is_admin } }`);
 
-    const currentMondayUser = res.data.me.id;
+    const currentMondayUser = res.data.me;
 
     return currentMondayUser;
   } catch (err) {
@@ -89,5 +89,64 @@ export async function getMondayContext() {
     console.log("Couldn't get monday context! Returned null", err);
 
     return null;
+  }
+}
+
+/**
+ * Makes a call to the monday api to fetch the settings for Green Works.
+ * @returns - The settings for Green Works on monday.
+ */
+export async function getMondaySettings() {
+  try {
+    const res = await monday.get('settings');
+
+    const mondaySettings = res.data;
+
+    return mondaySettings;
+  } catch (err) {
+    console.log("Couldn't get monday settings! Returned empty object", err);
+    return {};
+  }
+}
+
+/**
+ * Makes an api call to monday, updating Green Work's settings based on the 'settings' passed in.
+ * @param {object} newSettings - An object containing the most up-to-date settings for Green Works on monday.
+ * @return An object containing the updated settings, or null if the api call failed.
+ */
+export async function setMondaySettings(newSettings) {
+  try {
+    const res = await monday.set('settings', newSettings);
+
+    const newMondaySettings = res.data;
+
+    return newMondaySettings;
+  } catch (err) {
+    console.log('Failed to set the monday settings!', err);
+    return null;
+  }
+}
+
+/**
+ * Uses the monday api to set up a listener for whenever settings change.
+ * @param {function} callback - The function to invoke whenever this listener is updated.
+ */
+export async function listenForMondaySettingsChange(callback) {
+  try {
+    monday.listen('settings', (res) => callback(res.data));
+  } catch (err) {
+    console.log('Failed setting up the monday listener for settings!', err);
+  }
+}
+
+/**
+ * Uses the monday api to set up a listener for whenever settings change.
+ * @param {function} callback - The function to invoke whenever this listener is updated.
+ */
+export async function listenForMondayContextChange(callback) {
+  try {
+    monday.listen('context', (res) => callback(res.data));
+  } catch (err) {
+    console.log('Failed setting up the monday listener for context!', err);
   }
 }

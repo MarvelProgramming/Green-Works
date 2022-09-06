@@ -114,3 +114,4 @@ sketch
 
 # Compressed file
 *.zip
+/build

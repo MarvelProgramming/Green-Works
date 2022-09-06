@@ -188,8 +188,14 @@ body {
     "prog cards-top-row"
     "cards-bottom-row cards-bottom-row";
   padding: calc(var(--spacing-large) + 1rem);
+  padding-bottom: 0;
   max-width: 1400px;
   margin: 0 auto;
+}
+
+.App .main button.configure {
+  width: 10rem;
+  min-width: unset;
 }
 
 .App .main .legend {
@@ -220,6 +226,126 @@ body {
 
 .App .main .all-row {
   display: none;
+}
+
+.menu-modal {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  grid-template-areas: 
+    "header"
+    "submit";
+  position: absolute;
+  width: var(--modal-width);
+  top: 2.7rem;
+  right: 2.7rem;
+  transform-origin: top right;
+  background-color: var(--light-mint) !important;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 3px var(--light-mint) !important;
+  gap: var(--spacing-medium);
+  padding-bottom: var(--spacing-small);
+}
+
+.menu-modal form {
+  display: grid;
+  gap: var(--spacing-small);
+  grid-area: submit;
+}
+
+.menu-modal .header .heading {
+  color: var(--dark-green);
+  grid-area: header;
+  margin: 0;
+}
+
+.menu-modal .header .icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.menu-modal .header .icon {
+  outline: none;
+}
+
+.menu-modal .options {
+  justify-self: start;
+}
+
+button.submit {
+  border-radius: 12px;
+  color: var(--dark-green);
+}
+
+.menu-modal .submit {
+  margin-top: var(--spacing-medium);
+}
+
+button.submit, button.submit:hover {
+  background-color: var(--siege) !important;
+  transition: filter 0.2s ease-out;
+}
+
+button.submit:hover {
+  filter: brightness(1.05) !important;
+}
+
+.checkbox > div {
+  border: 1px solid var(--dark-green) !important;
+  border-radius: 4px;
+}
+
+.monday-style-checkbox__icon.icon_component {
+  color: var(--dark-green);
+  width: 30px;
+}
+
+.monday-style-checkbox__checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent !important;
+}
+
+.monday-style-checkbox__checkbox:after {
+  transition: none !important;
+}
+
+.menu-modal .options .monday-style-toggle_toggle {
+  transform: scale(0.8);
+  margin-left: 0;
+}
+
+.menu-modal .options .monday-style-toggle_wrapper {
+  gap: 0.22rem;
+  justify-self: flex-end;
+}
+
+.menu-modal .options .monday-style-toggle_wrapper, .menu-modal .options .monday-style-checkbox__label {
+  font-size: 13px;
+}
+
+.menu-modal .options .monday-style-toggle_toggle--selected {
+  filter: brightness(2.5);
+}
+
+.menu-modal .options .monday-style-toggle_toggle--not-selected::after {
+  left: -5px !important;
+}
+
+.menu-modal .options .monday-style-toggle_toggle--selected::after {
+  left: 28px !important;
+}
+
+.menu-modal .toggle {
+  background-color: transparent;
+  border: 1px solid var(--dark-green);
+  height: 1rem;
+}
+
+.menu-modal .toggle::after {
+  transform: scale(1.2);
+  background-color: var(--dark-green);
 }
 
 .scroller::-webkit-scrollbar {

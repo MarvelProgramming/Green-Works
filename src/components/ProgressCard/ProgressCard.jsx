@@ -92,15 +92,16 @@ export default function ProgressCard({ user, updateGoalProgressBar }) {
             justify={Flex.justify.SPACE_BETWEEN}
           >
             <p className="body-text-02">Tasks</p>
-            {user.id === currentUser.data.id && (
-              <Icon
-                iconType={Icon.type.SRC}
-                icon={AddTaskIcon}
-                iconLabel="myicon"
-                iconSize={16}
-                onClick={onAddTaskCallToActionClicked}
-              />
-            )}
+            {user.id === currentUser.data.id &&
+              currentUser.data.tasks.length < 4 && (
+                <Icon
+                  iconType={Icon.type.SRC}
+                  icon={AddTaskIcon}
+                  iconLabel="myicon"
+                  iconSize={16}
+                  onClick={onAddTaskCallToActionClicked}
+                />
+              )}
           </Flex>
           {user.id === currentUser.data.id && (
             <TextField
