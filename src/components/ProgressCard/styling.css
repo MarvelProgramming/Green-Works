@@ -13,8 +13,7 @@
   background-color: var(--primary-bg-color);
 }
 
-.progress-card {
-  color-scheme: dark;
+[data-theme="dark"] .progress-card {
   border: 4px solid var(--primary-brder-color);
   box-shadow: var(--primary-shdow);
 }
@@ -23,8 +22,7 @@
   border: 1px dashed var(--light-grey);
 }
 
-.progress-card.current-user {
-  color-scheme: dark;
+[data-theme="dark"] .progress-card.current-user {
   border: 4px dashed var(--secondary-brder-color);
 }
 

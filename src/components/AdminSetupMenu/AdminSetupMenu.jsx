@@ -90,7 +90,9 @@ export default function AdminSetupMenu({
             gap={Flex.gaps.LARGE}
           >
             <RadioButton
-              className="card-lock-radio"
+              className={`card-lock-radio ${
+                newConfiguration.globalCardLockState ? 'enabled' : ''
+              }`}
               name="card-lock"
               text="Lock all cards from all members"
               onSelect={() =>
@@ -99,7 +101,9 @@ export default function AdminSetupMenu({
               checked={newConfiguration.globalCardLockState}
             />
             <RadioButton
-              className="card-lock-radio"
+              className={`card-lock-radio ${
+                !newConfiguration.globalCardLockState ? 'enabled' : ''
+              }`}
               name="card-lock"
               text="Unlock all cards for members to edit"
               defaultChecked
