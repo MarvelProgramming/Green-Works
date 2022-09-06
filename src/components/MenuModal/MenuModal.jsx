@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import './styling.css';
 import DialogContentContainer from 'monday-ui-react-core/dist/DialogContentContainer';
 import Box from 'monday-ui-react-core/dist/Box';

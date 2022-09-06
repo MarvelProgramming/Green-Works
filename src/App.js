@@ -76,7 +76,7 @@ export default function App() {
     const currentMondayUser = await getCurrentMondayUser();
     let newCurrentMondayUser;
     // Used in testing to find a premade 'current user'.
-    if (currentMondayUser.id)
+    if (currentMondayUser?.id)
       newCurrentMondayUser = users.find(
         (user) => user.id === currentMondayUser.id
       );

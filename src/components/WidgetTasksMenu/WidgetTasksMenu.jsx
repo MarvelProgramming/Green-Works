@@ -1,9 +1,7 @@
 import React from 'react';
 import './styling.css';
 import MenuModal from '../MenuModal/MenuModal';
-import Icon from 'monday-ui-react-core/dist/Icon';
 import Checkbox from 'monday-ui-react-core/dist/Checkbox';
-import SettingsIcon from '../../images/settings.svg';
 import useCurrentUser from '../../hooks/useCurrentUser';
 
 export default function WidgetTasksMenu({

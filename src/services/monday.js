@@ -72,7 +72,7 @@ export async function saveMondayUserData(user) {
 
     monday.storage.instance.setItem(userID, userData);
   } catch (err) {
-    console.log(`Failed to save user(${userID})\'s information!\n`, err);
+    console.log(`Failed to save user(${userID})'s information!\n`, err);
   }
 }
 
