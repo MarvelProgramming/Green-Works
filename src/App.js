@@ -13,11 +13,13 @@ import {
   getCurrentMondayUser,
   getMondayUsers,
   getMondayUserSaveData,
+  getMondayContext,
+  getMondayFilter,
   saveMondayUserData,
   getMondaySettings,
   setMondaySettings as setRemoteMondaySettings,
   listenForMondaySettingsChange,
-  getMondayContext
+  listenForMondayFilterChange
 } from './services/monday';
 import mondayDefaultSettings from './data/mondayDefaultSettings';
 import userDefaultSettings from './data/userDefaultSettings';
@@ -29,6 +31,7 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState(userDefaultSettings.value);
   const [mondaySettings, setMondaySettings] = useState({});
   const [mondayContext, setMondayContext] = useState({ theme: 'dark' });
+  const [mondayFilter, setMondayFilter] = useState('');
   const [configuringMondaySettings, setConfiguringMondaySettings] =
     useState(false);
 
@@ -36,6 +39,7 @@ export default function App() {
     setupUsers();
     setupMondaySettings();
     setupMondayContext();
+    setupMondayFilter();
   }, []);
 
   /**
@@ -169,6 +173,22 @@ export default function App() {
     const newMondayContext = Object.assign({ theme: 'dark' }, resMondayContext);
 
     setMondayContext(newMondayContext);
+  }
+
+  /**
+   * Gets the current filter settings the user has on monday and sets it as the mondayFilter state, and also
+   * sets up a listener for any future changes to update the state.
+   */
+  async function setupMondayFilter() {
+    const resMondayFilter = await getMondayFilter();
+
+    updateMondayFilter(resMondayFilter);
+
+    listenForMondayFilterChange(updateMondayFilter);
+  }
+
+  function updateMondayFilter(newFilter) {
+    setMondayFilter(newFilter);
   }
 
   /**
