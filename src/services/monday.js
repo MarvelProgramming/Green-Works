@@ -134,7 +134,7 @@ export async function getMondayFilter() {
   try {
     const res = await monday.get('filter');
 
-    const mondayFilter = res.data;
+    const mondayFilter = res.data.term;
 
     return mondayFilter;
   } catch (err) {
@@ -174,7 +174,7 @@ export async function listenForMondayContextChange(callback) {
  */
 export async function listenForMondayFilterChange(callback) {
   try {
-    monday.listen('filter', (res) => callback(res.data));
+    monday.listen('filter', (res) => callback(res.data.term));
   } catch (err) {
     console.log('Failed setting up the monday listener for filter!', err);
   }
