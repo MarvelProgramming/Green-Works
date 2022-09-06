@@ -125,6 +125,21 @@ export async function setMondaySettings(newSettings) {
     return newMondaySettings;
   } catch (err) {
     console.log('Failed to set the monday settings!', err);
+
+    return null;
+  }
+}
+
+export async function getMondayFilter() {
+  try {
+    const res = await monday.get('filter');
+
+    const mondayFilter = res.data;
+
+    return mondayFilter;
+  } catch (err) {
+    console.log("Couldn't get monday settings! Returned empty object", err);
+
     return null;
   }
 }
@@ -150,5 +165,17 @@ export async function listenForMondayContextChange(callback) {
     monday.listen('context', (res) => callback(res.data));
   } catch (err) {
     console.log('Failed setting up the monday listener for context!', err);
+  }
+}
+
+/**
+ * Uses the monday api to set up a listener for whenever settings change.
+ * @param {function} callback - The function to invoke whenever this listener is updated.
+ */
+export async function listenForMondayFilterChange(callback) {
+  try {
+    monday.listen('filter', (res) => callback(res.data));
+  } catch (err) {
+    console.log('Failed setting up the monday listener for filter!', err);
   }
 }
