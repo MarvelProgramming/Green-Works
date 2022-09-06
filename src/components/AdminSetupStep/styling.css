@@ -1,0 +1,40 @@
+.admin-setup-step {
+  overflow: visible;
+}
+
+.admin-setup-step h2, .admin-setup-step h3, .admin-setup-step p {
+  margin: 0;
+  padding: 0;
+}
+
+.admin-setup-step .sub-group {
+  padding-left: calc(var(--spacing-xxl) + 0.3rem);
+}
+
+.admin-setup-step .hint-text {
+  color: var(--suva-grey);
+  font-size: 0.9rem;
+}
+
+.admin-setup-step input {
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: var(--super-light-grey) !important;
+  margin-top: 0.5rem;
+}
+
+.admin-setup-step:nth-child(1) input {
+  width: 20rem !important;
+}
+
+.admin-setup-step:nth-child(n + 2) input {
+  text-align: center;
+}
+
+.admin-setup-step:nth-child(2) input {
+  width: 8rem !important;
+}
+
+.admin-setup-step:nth-child(3) input {
+  width: 5rem !important;
+}

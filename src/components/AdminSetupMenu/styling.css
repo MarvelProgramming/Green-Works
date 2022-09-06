@@ -1,0 +1,70 @@
+.admin-setup-menu-container {
+  position: absolute;
+  align-self: center;
+}
+
+.admin-setup-menu .main-header {
+  margin: 0;
+}
+
+.admin-setup-menu .configuration-area {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--spacing-xxxl)
+}
+
+.admin-setup-menu .side-config-area {
+  height: 100%;
+  align-self: center;
+}
+
+.admin-setup-menu .side-config-area div:first-child {
+  padding-top: var(--spacing-xl);
+}
+
+.admin-setup-menu .submit.btn, .admin-setup-menu .reset-btn {
+  flex: 1;
+}
+
+.admin-setup-menu .reset-btn {
+  color: var(--dark-green);
+  border: 0px solid transparent;
+  background-color: transparent;
+  transition: border 0.2s ease-out;
+}
+
+.admin-setup-menu .reset-btn:hover {
+  background-color: transparent;
+  border: 1px solid var(--dark-green);
+}
+
+.admin-setup-menu .submit-btn {
+  color: var(--dark-green);
+  background-color: var(--dark-mint);
+}
+
+.admin-setup-menu .card-lock-radio {
+  position: relative;
+}
+
+.admin-setup-menu .card-lock-radio span span {
+  display: none;
+}
+
+.admin-setup-menu .card-lock-radio::before {
+  transform: scale(1.2);
+}
+
+.admin-setup-menu .card-lock-radio:nth-child(1)::before {
+  content: url('../../images/lock.svg');
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.admin-setup-menu .card-lock-radio:nth-child(2)::before {
+  content: url('../../images/unlock.svg');
+  position: absolute;
+  left: 0;
+  top: 0;
+}

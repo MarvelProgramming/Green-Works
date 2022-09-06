@@ -22,11 +22,11 @@ export default function ProgressCardList({
   }
 
   /**
-   * Gets all of the users, except the first two.
-   * @returns An array containing all the users, except the first two.
+   * Gets all of the users, except the first two, up to 10 in total.
+   * @returns An array containing all the users (up to 10), except the first two.
    */
-  function getUsersOffsetByTwo() {
-    const [, , ...theRest] = users;
+  function getRestOfUsers() {
+    const theRest = users.slice(2, 12);
 
     return theRest;
   }
@@ -47,7 +47,7 @@ export default function ProgressCardList({
         ))}
       </Flex>
       <Box className="bottom-row">
-        {getUsersOffsetByTwo().map((user, idx) => (
+        {getRestOfUsers().map((user, idx) => (
           <ProgressCard
             key={idx}
             user={user}

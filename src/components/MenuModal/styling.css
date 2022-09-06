@@ -23,11 +23,11 @@
   animation: slide-in-from-top 0.5s forwards 0s ease-out;
 }
 
-.menu-modal.fade-in {
+.fade-in {
   animation: fade-in 0.5s forwards 0s ease-out;
 }
 
-.menu-modal.fade-out, .menu-modal.fade-out * {
+.fade-out, .menu-modal.fade-out * {
   animation: fade-out 0.5s forwards 0s ease-out;
 }
 
