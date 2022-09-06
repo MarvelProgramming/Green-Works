@@ -3,6 +3,10 @@
   align-self: center;
 }
 
+.admin-setup-menu-container, .admin-setup-menu {
+  overflow: visible !important;
+}
+
 .admin-setup-menu .main-header {
   margin: 0;
 }
@@ -33,18 +37,39 @@
   transition: border 0.2s ease-out;
 }
 
+[data-theme="dark"] .admin-setup-menu .reset-btn {
+  filter: brightness(2);
+}
+
 .admin-setup-menu .reset-btn:hover {
   background-color: transparent;
   border: 1px solid var(--dark-green);
 }
 
+[data-theme="dark"] .admin-setup-menu .reset-btn:hover {
+  border: 1px solid #fff;
+}
+
 .admin-setup-menu .submit-btn {
   color: var(--dark-green);
-  background-color: var(--dark-mint);
+  background-color: var(--dark-mint) !important;
 }
 
 .admin-setup-menu .card-lock-radio {
   position: relative;
+}
+
+.admin-setup-menu .card-lock-radio.enabled::after {
+  content: '';
+  position: absolute;
+  color: var(--primary-txt-color);
+  --scale: 30px;
+  top: calc(var(--scale) / 2 * -1 + 9px);
+  left: calc(var(--scale) / 2 * -1 + 9px);
+  width: var(--scale);
+  height: var(--scale);
+  border: 1px solid var(--primary-txt-color);
+  border-radius: 50%;
 }
 
 .admin-setup-menu .card-lock-radio span span {
@@ -53,6 +78,14 @@
 
 .admin-setup-menu .card-lock-radio::before {
   transform: scale(1.2);
+}
+
+.monday-style-radio-button-component__radio-label {
+  color: var(--primary-txt-color) !important;
+}
+
+.admin-setup-menu .checkbox > span {
+  color: var(--primary-txt-color) !important;
 }
 
 .admin-setup-menu .card-lock-radio:nth-child(1)::before {
@@ -67,4 +100,12 @@
   position: absolute;
   left: 0;
   top: 0;
+}
+
+[data-theme="dark"] .admin-setup-menu .card-lock-radio:nth-child(1)::before {
+  content: url('../../images/lock-light.svg');
+}
+
+[data-theme="dark"] .admin-setup-menu .card-lock-radio:nth-child(2)::before {
+  content: url('../../images/unlock-light.svg');
 }

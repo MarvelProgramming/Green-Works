@@ -16,7 +16,8 @@ import {
   saveMondayUserData,
   getMondaySettings,
   setMondaySettings as setRemoteMondaySettings,
-  listenForMondaySettingsChange
+  listenForMondaySettingsChange,
+  getMondayContext
 } from './services/monday';
 import mondayDefaultSettings from './data/mondayDefaultSettings';
 import userDefaultSettings from './data/userDefaultSettings';
@@ -27,12 +28,14 @@ export default function App() {
   const [progress, setProgress] = useState(0);
   const [currentUser, setCurrentUser] = useState(userDefaultSettings.value);
   const [mondaySettings, setMondaySettings] = useState({});
+  const [mondayContext, setMondayContext] = useState({ theme: 'dark' });
   const [configuringMondaySettings, setConfiguringMondaySettings] =
     useState(false);
 
   useEffect(() => {
     setupUsers();
     setupMondaySettings();
+    setupMondayContext();
   }, []);
 
   /**
@@ -158,6 +161,17 @@ export default function App() {
   }
 
   /**
+   * Gets the context for Green Works from the monday api and sets it as the mondayContext state.
+   */
+  async function setupMondayContext() {
+    const resMondayContext = await getMondayContext();
+
+    const newMondayContext = Object.assign({ theme: 'dark' }, resMondayContext);
+
+    setMondayContext(newMondayContext);
+  }
+
+  /**
    * Adjusts the amount of fill users see in the goal progress bar.
    */
   function updateGoalProgressBar() {
@@ -229,7 +243,7 @@ export default function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" data-theme={mondayContext.theme}>
       <Box
         className={`main ${configuringMondaySettings ? 'fade-out' : 'fade-in'}`}
       >

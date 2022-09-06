@@ -7,6 +7,10 @@
   padding: 0;
 }
 
+.admin-setup-step h2, .admin-setup-step h3 {
+  color: var(--primary-txt-color) !important;
+}
+
 .admin-setup-step .sub-group {
   padding-left: calc(var(--spacing-xxl) + 0.3rem);
 }
