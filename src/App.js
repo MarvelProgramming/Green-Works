@@ -149,7 +149,7 @@ export default function App() {
   async function setMondaySettingsAndRemote(newSettings) {
     const updatedMondaySettings = await setRemoteMondaySettings(newSettings);
 
-    if (updatedMondaySettings.checkInReminder) sendGlobalCheckinNotification();
+    if (updatedMondaySettings?.checkInReminder) sendGlobalCheckinNotification();
 
     updateMondaySettings(updatedMondaySettings);
   }
@@ -241,7 +241,7 @@ export default function App() {
     setCurrentUser(newUser);
     saveMondayUserData(currentUser);
     setMondaySettingsAndRemote({
-      teamProgress: (int.parse(mondaySettings.teamProgress) + 1).toString()
+      teamProgress: (parseInt(mondaySettings.teamProgress) + 1).toString()
     });
   }
 
