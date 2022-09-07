@@ -3,8 +3,11 @@ import './styling.css';
 import Box from 'monday-ui-react-core/dist/Box';
 import { useColorByTaskPercentage } from '../../hooks/useColorByPercentage';
 
-export default function ProgressCardTask({ task }) {
-  const taskColor = useColorByTaskPercentage(task);
+export default function ProgressCardTask({ task, mondaySettings }) {
+  const taskColor = useColorByTaskPercentage(
+    task,
+    mondaySettings.teamProgressGoal
+  );
 
   return (
     <Box className={`progress-card-task ${taskColor}`}>

@@ -31,8 +31,24 @@ export default function AdminSetupMenu({
     setNewConfiguration(updatedConfiguration);
   }
 
+  /**
+   * Takes all of the settings that have been configured in the menu, calculates the team's progress goal, and updates the settings remotely before resetting the inputs.
+   */
   function confirmNewConfiguration() {
-    setMondaySettingsAndRemote(newConfiguration);
+    const maxTasksPerUser = 4;
+    const averageDaysInMonth = 30;
+    const teamProgressGoal =
+      newConfiguration.teamMemberCount *
+      maxTasksPerUser *
+      averageDaysInMonth *
+      (newConfiguration.teamSuccessRate * 0.01);
+
+    const finalConfiguration = {
+      ...newConfiguration,
+      teamProgressGoal
+    };
+
+    setMondaySettingsAndRemote(finalConfiguration);
     setNewConfiguration(mondayDefaultSettings.value);
     setConfiguringMondaySettings(false);
   }

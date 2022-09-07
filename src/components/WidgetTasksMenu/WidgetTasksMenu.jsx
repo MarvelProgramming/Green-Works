@@ -17,13 +17,16 @@ export default function WidgetTasksMenu({
   function handleSubmit() {
     const newUserTasks = currentUser.data.tasks.map((task) => ({
       ...task,
-      status: task.status + (task.toggle ? 2.5 : 0)
+      status: task.status + 1
     }));
 
     currentUser.updateUserTasks(newUserTasks);
     handleClose();
   }
 
+  /**
+   * Invokes the callback prop responsible for making the WidgetSettingsMenu visible.
+   */
   function handleOpenSettings() {
     handleOpenSettingsMenu();
   }

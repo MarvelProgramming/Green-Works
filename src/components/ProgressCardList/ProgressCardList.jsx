@@ -4,10 +4,7 @@ import Flex from 'monday-ui-react-core/dist/Flex';
 import Box from 'monday-ui-react-core/dist/Box';
 import ProgressCard from '../ProgressCard/ProgressCard';
 
-export default function ProgressCardList({
-  users = [],
-  updateGoalProgressBar
-}) {
+export default function ProgressCardList({ users = [], mondaySettings }) {
   /**
    * Gets the first two users, ignoring all the rest.
    * @returns The first two users.
@@ -39,29 +36,17 @@ export default function ProgressCardList({
         justify={Flex.justify.END}
       >
         {getFirstTwoUsers().map((user, idx) => (
-          <ProgressCard
-            key={idx}
-            user={user}
-            updateGoalProgressBar={updateGoalProgressBar}
-          />
+          <ProgressCard key={idx} user={user} mondaySettings={mondaySettings} />
         ))}
       </Flex>
       <Box className="bottom-row">
         {getRestOfUsers().map((user, idx) => (
-          <ProgressCard
-            key={idx}
-            user={user}
-            updateGoalProgressBar={updateGoalProgressBar}
-          />
+          <ProgressCard key={idx} user={user} mondaySettings={mondaySettings} />
         ))}
       </Box>
       <Box className="all-row">
         {users.map((user, idx) => (
-          <ProgressCard
-            key={idx}
-            user={user}
-            updateGoalProgressBar={updateGoalProgressBar}
-          />
+          <ProgressCard key={idx} user={user} mondaySettings={mondaySettings} />
         ))}
       </Box>
     </>

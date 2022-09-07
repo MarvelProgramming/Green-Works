@@ -11,12 +11,15 @@ import { useColorByUserTasksPercentage } from '../../hooks/useColorByPercentage'
 import useCurrentUser from '../../hooks/useCurrentUser';
 import useFirstName from '../../hooks/useFirstName';
 
-export default function ProgressCard({ user, updateGoalProgressBar }) {
+export default function ProgressCard({ user, mondaySettings }) {
   const [currentlyAddingTask, setCurrentlyAddingTask] = useState(false);
   const [newTaskInput, setNewTaskInput] = useState('');
   const newTaskInputRef = useRef(null);
   const [newTaskInputFocusDelay, setNewTaskInputFocusDelay] = useState(0);
-  const avatarBorderColor = useColorByUserTasksPercentage(user);
+  const avatarBorderColor = useColorByUserTasksPercentage(
+    user,
+    mondaySettings.teamProgressGoal
+  );
   const currentUser = useCurrentUser();
   const userFirstName = useFirstName(user);
 
@@ -29,9 +32,9 @@ export default function ProgressCard({ user, updateGoalProgressBar }) {
       user.tasks.unshift({ label: newTaskInput, status: 0, toggle: false });
 
       setNewTaskInput('');
+
       newTaskInputRef.current.value = '';
 
-      updateGoalProgressBar();
       event.target.blur();
     }
   }
@@ -128,7 +131,11 @@ export default function ProgressCard({ user, updateGoalProgressBar }) {
             align={Flex.align.STRETCH}
           >
             {user.tasks.map((task, idx) => (
-              <ProgressCardTask key={idx} task={task} />
+              <ProgressCardTask
+                key={idx}
+                task={task}
+                mondaySettings={mondaySettings}
+              />
             ))}
           </Flex>
         </Box>
