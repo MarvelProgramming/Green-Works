@@ -17,7 +17,7 @@ export default function WidgetTasksMenu({
   function handleSubmit() {
     const newUserTasks = currentUser.data.tasks.map((task) => ({
       ...task,
-      status: task.status + 1
+      status: task.status + (task.toggle ? 1 : 0)
     }));
 
     currentUser.updateUserTasks(newUserTasks);
