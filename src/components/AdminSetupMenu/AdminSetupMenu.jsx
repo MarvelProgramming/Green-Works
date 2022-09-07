@@ -49,12 +49,19 @@ export default function AdminSetupMenu({
     };
 
     setMondaySettingsAndRemote(finalConfiguration);
-    setNewConfiguration(mondayDefaultSettings.value);
+    handleClose();
+  }
+
+  function handleClose() {
     setConfiguringMondaySettings(false);
+    setNewConfiguration(mondayDefaultSettings.value);
   }
 
   return (
     <Box className="admin-setup-menu">
+      <Button className="back-btn" onClick={handleClose}>
+        Back
+      </Button>
       <Heading
         className="main-header"
         value="Thanks for choosing Green Works!"
