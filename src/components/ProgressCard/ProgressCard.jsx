@@ -96,7 +96,8 @@ export default function ProgressCard({ user, mondaySettings }) {
           >
             <p className="body-text-02">Tasks</p>
             {user.id === currentUser.data.id &&
-              currentUser.data.tasks.length < 4 && (
+              currentUser.data.tasks.length < 4 &&
+              !mondaySettings.globalCardLockState && (
                 <Icon
                   iconType={Icon.type.SRC}
                   icon={AddTaskIcon}
