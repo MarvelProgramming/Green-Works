@@ -68,7 +68,7 @@
   transition: border 0.2s ease-out;
 }
 
-.dark-app-theme .admin-setup-menu .reset-btn {
+[data-theme="dark"] .admin-setup-menu .reset-btn {
   filter: brightness(2);
 }
 
@@ -77,7 +77,7 @@
   border: 1px solid var(--dark-green);
 }
 
-.dark-app-theme .admin-setup-menu .reset-btn:hover {
+[data-theme="dark"] .admin-setup-menu .reset-btn:hover {
   border: 1px solid #fff;
 }
 
@@ -133,10 +133,10 @@
   top: 0;
 }
 
-.dark-app-theme .admin-setup-menu .card-lock-radio:nth-child(1)::before {
+[data-theme="dark"] .admin-setup-menu .card-lock-radio:nth-child(1)::before {
   content: url('../../images/lock-light.svg');
 }
 
-.dark-app-theme .admin-setup-menu .card-lock-radio:nth-child(2)::before {
+[data-theme="dark"] .admin-setup-menu .card-lock-radio:nth-child(2)::before {
   content: url('../../images/unlock-light.svg');
 }
