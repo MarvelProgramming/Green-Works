@@ -200,13 +200,12 @@ export async function displayMondayConfirmation(
   excludeCancelButton = false
 ) {
   try {
-    const res = await monday.execute(
-      'confirm',
+    const res = await monday.execute('confirm', {
       message,
       confirmButton,
       cancelButton,
       excludeCancelButton
-    );
+    });
 
     const confirmation = res.data.confirm;
 

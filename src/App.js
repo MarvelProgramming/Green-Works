@@ -274,8 +274,7 @@ export default function App() {
     const confirmation = await displayMondayConfirmation(
       'Are you sure you want to reset Green Works settings and all user tasks? This CANNOT be undone!',
       'Yes',
-      'No',
-      false
+      'No'
     );
 
     if (!confirmation) return;
