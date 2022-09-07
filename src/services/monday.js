@@ -217,3 +217,28 @@ export async function displayMondayConfirmation(
     return false;
   }
 }
+
+/**
+ * Makes a call to the monday api in order to send a notification (and potentially an email) to a specified user.
+ * @param {string} message - The text that will be shown to the target user.
+ * @param {string} userId - The unique monday idenfitier for the user.
+ * @param {string} targetId - The Green Works board id.
+ */
+export async function sendMondayNotification(message, userId, targetId) {
+  try {
+    monday.api(`
+      mutation {
+        create_notification(
+          text: "${message}",
+          user_id: ${userId},
+          target_id: ${targetId},
+          target_type: Project,
+        ) { 
+          text
+        }
+      }
+    `);
+  } catch (err) {
+    console.log('Failed to send monday notification!', err);
+  }
+}

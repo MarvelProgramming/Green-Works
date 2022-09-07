@@ -21,7 +21,8 @@ import {
   listenForMondayContextChange,
   listenForMondaySettingsChange,
   listenForMondayFilterChange,
-  displayMondayConfirmation
+  displayMondayConfirmation,
+  sendMondayNotification
 } from './services/monday';
 import mondayDefaultSettings from './data/mondayDefaultSettings';
 import userDefaultSettings from './data/userDefaultSettings';
@@ -148,6 +149,8 @@ export default function App() {
   async function setMondaySettingsAndRemote(newSettings) {
     const updatedMondaySettings = await setRemoteMondaySettings(newSettings);
 
+    if (updatedMondaySettings.checkInReminder) sendGlobalCheckinNotification();
+
     updateMondaySettings(updatedMondaySettings);
   }
 
@@ -163,6 +166,21 @@ export default function App() {
     );
 
     setMondaySettings(newMondaySettings);
+  }
+
+  /**
+   * Sends a monday notification (and possibly an email) to all members of the Green Works board.
+   */
+  async function sendGlobalCheckinNotification() {
+    for (let i = 0; i < users.length; i++) {
+      const user = users[i];
+
+      sendMondayNotification(
+        "You've been invited to participate in a green initiative!",
+        user.id,
+        mondayContext.boardId
+      );
+    }
   }
 
   /**
