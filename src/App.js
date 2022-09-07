@@ -222,7 +222,7 @@ export default function App() {
     setCurrentUser(newUser);
     saveMondayUserData(currentUser);
     setMondaySettingsAndRemote({
-      teamProgress: mondaySettings.teamProgress + 1
+      teamProgress: (int.parse(mondaySettings.teamProgress) + 1).toString()
     });
   }
 
@@ -246,6 +246,23 @@ export default function App() {
       // Splicing in order to change the underlying settings array, forcing a state update.
       newUser.settings.splice(0, newUser.settings.length, ...newSettings);
     });
+  }
+
+  /**
+   * Resets all the Green Works settings on monday, as well as clear all of the tasks that user's have in the board.
+   */
+  async function resetAll() {
+    setMondaySettingsAndRemote(mondayDefaultSettings.value);
+
+    for (let i = 0; i < users.length; i++) {
+      const user = users[i];
+      const newUser = {
+        ...user,
+        tasks: []
+      };
+
+      await saveMondayUserData(newUser);
+    }
   }
 
   return (
@@ -292,6 +309,7 @@ export default function App() {
         <AdminSetupMenu
           setMondaySettingsAndRemote={setMondaySettingsAndRemote}
           setConfiguringMondaySettings={setConfiguringMondaySettings}
+          resetAll={resetAll}
         />
       </Box>
     </div>

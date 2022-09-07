@@ -11,7 +11,8 @@ import mondayDefaultSettings from '../../data/mondayDefaultSettings';
 
 export default function AdminSetupMenu({
   setMondaySettingsAndRemote,
-  setConfiguringMondaySettings
+  setConfiguringMondaySettings,
+  resetAll
 }) {
   const [newConfiguration, setNewConfiguration] = useState(
     mondayDefaultSettings.value
@@ -53,6 +54,9 @@ export default function AdminSetupMenu({
     handleClose();
   }
 
+  /**
+   * Resets the configuration inputs before closing the menu.
+   */
   function handleClose() {
     setConfiguringMondaySettings(false);
     setNewConfiguration(mondayDefaultSettings.value);
@@ -152,7 +156,9 @@ export default function AdminSetupMenu({
               />
             </Flex>
             <Flex gap={Flex.gaps.LARGE} align={Flex.align.STRETCH}>
-              <Button className="reset-btn">Reset</Button>
+              <Button className="reset-btn" onClick={resetAll}>
+                Reset
+              </Button>
               <Button className="submit" type={Button.inputTags.SUBMIT}>
                 Submit
               </Button>
