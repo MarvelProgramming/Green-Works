@@ -15,7 +15,7 @@ export default function AdminSetupStep({
   value,
   handleChange,
   targetPropertyName,
-  validation
+  validation = () => true
 }) {
   /**
    * Invokes the handleChange callback, passing in the TextField's most up-to-date value.
