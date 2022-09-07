@@ -20,7 +20,8 @@ import {
   setMondaySettings as setRemoteMondaySettings,
   listenForMondayContextChange,
   listenForMondaySettingsChange,
-  listenForMondayFilterChange
+  listenForMondayFilterChange,
+  displayMondayConfirmation
 } from './services/monday';
 import mondayDefaultSettings from './data/mondayDefaultSettings';
 import userDefaultSettings from './data/userDefaultSettings';
@@ -252,6 +253,15 @@ export default function App() {
    * Resets all the Green Works settings on monday, as well as clear all of the tasks that user's have in the board.
    */
   async function resetAll() {
+    const confirmation = await displayMondayConfirmation(
+      'Are you sure you want to reset Green Works settings and all user tasks? This CANNOT be undone!',
+      'Yes',
+      'No',
+      false
+    );
+
+    if (!confirmation) return;
+
     setMondaySettingsAndRemote(mondayDefaultSettings.value);
 
     for (let i = 0; i < users.length; i++) {
