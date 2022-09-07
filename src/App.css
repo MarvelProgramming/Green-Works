@@ -14,7 +14,7 @@
   --header-text-color1: #055425;
 }
 
-.light-app-theme {
+[data-theme="light"] {
   --primary-txt-color: #000;
   --secondary-txt-color: #8A8A8A;
 
@@ -24,7 +24,7 @@
   color: var(--primary-txt-color);
 }
 
-.dark-app-theme {
+[data-theme="dark"] {
   --primary-txt-color: #fff;
   --secondary-txt-color: #DBDBDB;
   --body-txt-color1: #000;
@@ -206,11 +206,11 @@ button.configure:hover {
   filter: brightness(2);
 }
 
-.dark-app-theme button.configure {
+[data-theme="dark"] button.configure {
   filter: brightness(10);
 }
 
-.dark-app-theme button.configure:hover {
+[data-theme="dark"] button.configure:hover {
   filter: brightness(7);
 }
 
@@ -311,7 +311,7 @@ button.submit:hover {
   border-radius: 4px;
 }
 
-.dark-app-theme .checkbox > div {
+[data-theme="dark"] .checkbox > div {
   border: 1px solid #fff !important;
 }
 
@@ -320,7 +320,7 @@ button.submit:hover {
   width: 30px;
 }
 
-.dark-app-theme .monday-style-checkbox__icon.icon_component {
+[data-theme="dark"] .monday-style-checkbox__icon.icon_component {
   color: #fff;
 }
 

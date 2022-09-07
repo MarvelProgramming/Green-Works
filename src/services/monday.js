@@ -153,7 +153,7 @@ export async function getMondayFilter() {
  * Uses the monday api to set up a listener for whenever settings change.
  * @param {function} callback - The function to invoke whenever this listener is updated.
  */
-export async function listenForMondaySettingsChange(callback) {
+export function listenForMondaySettingsChange(callback) {
   try {
     monday.listen('settings', (res) => callback(res.data));
   } catch (err) {
@@ -165,7 +165,7 @@ export async function listenForMondaySettingsChange(callback) {
  * Uses the monday api to set up a listener for whenever settings change.
  * @param {function} callback - The function to invoke whenever this listener is updated.
  */
-export async function listenForMondayContextChange(callback) {
+export function listenForMondayContextChange(callback) {
   try {
     monday.listen('context', (res) => callback(res.data));
   } catch (err) {
@@ -177,7 +177,7 @@ export async function listenForMondayContextChange(callback) {
  * Uses the monday api to set up a listener for whenever settings change.
  * @param {function} callback - The function to invoke whenever this listener is updated.
  */
-export async function listenForMondayFilterChange(callback) {
+export function listenForMondayFilterChange(callback) {
   try {
     monday.listen('filter', (res) => callback(res.data.term));
   } catch (err) {

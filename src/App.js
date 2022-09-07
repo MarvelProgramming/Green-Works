@@ -14,9 +14,11 @@ import {
   getMondayUsers,
   getMondayUserSaveData,
   getMondayFilter,
+  getMondayContext,
   saveMondayUserData,
   getMondaySettings,
   setMondaySettings as setRemoteMondaySettings,
+  listenForMondayContextChange,
   listenForMondaySettingsChange,
   listenForMondayFilterChange
 } from './services/monday';
@@ -29,12 +31,14 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState(userDefaultSettings.value);
   const [mondaySettings, setMondaySettings] = useState({});
   const [mondayFilter, setMondayFilter] = useState('');
+  const [mondayContext, setMondayContext] = useState({ theme: 'light' });
   const [configuringMondaySettings, setConfiguringMondaySettings] =
     useState(false);
 
   useEffect(() => {
     setupUsers();
     setupMondaySettings();
+    setupMondayContext();
     setupMondayFilter();
   }, []);
 
@@ -161,6 +165,32 @@ export default function App() {
   }
 
   /**
+   * Sets up the context listener, as well as grabs the most up-to-date context from the monday api and sets
+   * it as the current state.
+   */
+  async function setupMondayContext() {
+    const resMondayContext = await getMondayContext();
+
+    updateMondayContext(resMondayContext);
+
+    listenForMondayContextChange(updateMondayContext);
+  }
+
+  /**
+   * Takes the most up-to-date monday context for Green Works and updates the current state with it, or uses
+   * the default context if one wasn't provided.
+   * @param {object} updatedMondaySettings - An object with the most up-to-date monday context for Green Works.
+   */
+  function updateMondayContext(updatedMondayContext) {
+    const newMondayContext = Object.assign(
+      { theme: 'light' },
+      updatedMondayContext
+    );
+
+    setMondayContext(newMondayContext);
+  }
+
+  /**
    * Gets the current filter settings the user has on monday and sets it as the mondayFilter state, and also
    * sets up a listener for any future changes to update the state.
    */
@@ -219,7 +249,7 @@ export default function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" data-theme={mondayContext.theme}>
       <Box
         className={`main ${configuringMondaySettings ? 'fade-out' : 'fade-in'}`}
       >
