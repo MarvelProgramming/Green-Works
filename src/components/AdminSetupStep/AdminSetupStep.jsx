@@ -52,7 +52,7 @@ export default function AdminSetupStep({
           size={Heading.sizes.MEDIUM}
         />
         <p className="hint-text">{hintText}</p>
-        <Flex gap={Flex.gaps.LARGE}>
+        <Flex className="input-area" gap={Flex.gaps.LARGE}>
           <TextField
             placeholder={textFieldPlaceholder}
             autoFocus={autoFocus}
