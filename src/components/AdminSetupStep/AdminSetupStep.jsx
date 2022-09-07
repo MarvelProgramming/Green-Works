@@ -14,7 +14,8 @@ export default function AdminSetupStep({
   autoFocus,
   value,
   handleChange,
-  targetPropertyName
+  targetPropertyName,
+  validation
 }) {
   /**
    * Invokes the handleChange callback, passing in the TextField's most up-to-date value.
@@ -22,6 +23,18 @@ export default function AdminSetupStep({
    */
   function handleInputChange(inputValue) {
     handleChange(targetPropertyName, inputValue.toString());
+  }
+
+  /**
+   * Validates the last key pressed and ignores it if it fails.
+   * @param {object} event - The onKeyDown event belonging to the TextField.
+   */
+  function validateInput(event) {
+    const isValidInput = validation(event.key);
+
+    // Checking if length is 1, since otherwise it's likely a control key (e.g. ctrl, delete, backspace, etc) and those
+    // shouldn't be ignored.
+    if (!isValidInput && event.key.length === 1) event.preventDefault();
   }
 
   return (
@@ -44,7 +57,9 @@ export default function AdminSetupStep({
             placeholder={textFieldPlaceholder}
             autoFocus={autoFocus}
             value={value}
+            onKeyDown={validateInput}
             onChange={handleInputChange}
+            required
           />
           {textFieldAfterIcon}
         </Flex>
