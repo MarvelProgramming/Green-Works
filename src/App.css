@@ -24,7 +24,7 @@
   color: var(--primary-txt-color);
 }
 
-[data-theme="dark"] {
+[data-theme]:not([data-theme="light"]) {
   --primary-txt-color: #fff;
   --secondary-txt-color: #DBDBDB;
   --body-txt-color1: #000;
@@ -206,11 +206,11 @@ button.configure:hover {
   filter: brightness(2);
 }
 
-[data-theme="dark"] button.configure {
+[data-theme]:not([data-theme="light"]) button.configure {
   filter: brightness(10);
 }
 
-[data-theme="dark"] button.configure:hover {
+[data-theme]:not([data-theme="light"]) button.configure:hover {
   filter: brightness(7);
 }
 
@@ -311,7 +311,7 @@ button.submit:hover {
   border-radius: 4px;
 }
 
-[data-theme="dark"] .checkbox > div {
+[data-theme]:not([data-theme="light"]) .checkbox > div {
   border: 1px solid #fff !important;
 }
 
@@ -320,7 +320,7 @@ button.submit:hover {
   width: 30px;
 }
 
-[data-theme="dark"] .monday-style-checkbox__icon.icon_component {
+[data-theme]:not([data-theme="light"]) .monday-style-checkbox__icon.icon_component {
   color: #fff;
 }
 
