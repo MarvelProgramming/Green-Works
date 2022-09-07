@@ -90,7 +90,7 @@
   position: relative;
 }
 
-.admin-setup-menu .card-lock-radio.enabled::after {
+.admin-setup-menu .card-lock-radio::after {
   content: '';
   position: absolute;
   color: var(--primary-txt-color);
@@ -99,8 +99,14 @@
   left: calc(var(--scale) / 2 * -1 + 9px);
   width: var(--scale);
   height: var(--scale);
-  border: 1px solid var(--primary-txt-color);
+  border: 2px solid var(--primary-txt-color);
   border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.admin-setup-menu .card-lock-radio.enabled::after {
+  opacity: 1;
 }
 
 .admin-setup-menu .card-lock-radio span span {

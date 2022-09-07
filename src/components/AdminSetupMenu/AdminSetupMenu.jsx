@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styling.css';
 import Flex from 'monday-ui-react-core/dist/Flex';
 import Box from 'monday-ui-react-core/dist/Box';
@@ -34,7 +34,8 @@ export default function AdminSetupMenu({
   /**
    * Takes all of the settings that have been configured in the menu, calculates the team's progress goal, and updates the settings remotely before resetting the inputs.
    */
-  function confirmNewConfiguration() {
+  function confirmNewConfiguration(event) {
+    event.preventDefault();
     const maxTasksPerUser = 4;
     const averageDaysInMonth = 30;
     const teamProgressGoal =
@@ -66,92 +67,99 @@ export default function AdminSetupMenu({
         className="main-header"
         value="Thanks for choosing Green Works!"
       />
-      <div className="configuration-area">
-        <Flex
-          direction={Flex.directions.COLUMN}
-          gap={Flex.gaps.LARGE + 60}
-          align={Flex.align.START}
-        >
-          <AdminSetupStep
-            title="Step 1"
-            subTitle="What goal is your team working toward this month?"
-            hintText="A four day work week? Company sponsored happy hour? Tickets to an event? Have some fun with this!"
-            textFieldPlaceholder="Type here..."
-            autoFocus={true}
-            targetPropertyName="teamGoal"
-            handleChange={updateNewConfiguration}
-            value={newConfiguration.teamGoal.toString()}
-          />
-          <AdminSetupStep
-            title="Step 2"
-            subTitle="How many members make up your team?"
-            hintText="Don't forget to include yourself!"
-            textFieldPlaceholder="Enter value"
-            targetPropertyName="teamMemberCount"
-            handleChange={updateNewConfiguration}
-            value={newConfiguration.teamMemberCount.toString()}
-          />
-          <AdminSetupStep
-            title="Step 3"
-            subTitle="What is your goal success rate for your team to meet each month?"
-            hintText="We recommend starting at 60%"
-            textFieldPlaceholder="Value"
-            textFieldAfterIcon={<p>%</p>}
-            targetPropertyName="teamSuccessRate"
-            handleChange={updateNewConfiguration}
-            value={newConfiguration.teamSuccessRate.toString()}
-          />
-        </Flex>
-        <Flex
-          className="side-config-area"
-          direction={Flex.directions.COLUMN}
-          justify={Flex.justify.SPACE_BETWEEN}
-        >
+      <form onSubmit={confirmNewConfiguration}>
+        <div className="configuration-area">
           <Flex
             direction={Flex.directions.COLUMN}
+            gap={Flex.gaps.LARGE + 60}
             align={Flex.align.START}
-            gap={Flex.gaps.LARGE}
           >
-            <RadioButton
-              className={`card-lock-radio ${
-                newConfiguration.globalCardLockState ? 'enabled' : ''
-              }`}
-              name="card-lock"
-              text="Lock all cards from all members"
-              onSelect={() =>
-                updateNewConfiguration('globalCardLockState', true)
-              }
-              checked={newConfiguration.globalCardLockState}
+            <AdminSetupStep
+              title="Step 1"
+              subTitle="What goal is your team working toward this month?"
+              hintText="A four day work week? Company sponsored happy hour? Tickets to an event? Have some fun with this!"
+              textFieldPlaceholder="Type here..."
+              autoFocus={true}
+              targetPropertyName="teamGoal"
+              handleChange={updateNewConfiguration}
+              value={newConfiguration.teamGoal.toString()}
             />
-            <RadioButton
-              className={`card-lock-radio ${
-                !newConfiguration.globalCardLockState ? 'enabled' : ''
-              }`}
-              name="card-lock"
-              text="Unlock all cards for members to edit"
-              defaultChecked
-              onSelect={() =>
-                updateNewConfiguration('globalCardLockState', false)
-              }
-              checked={!newConfiguration.globalCardLockState}
+            <AdminSetupStep
+              title="Step 2"
+              subTitle="How many members make up your team?"
+              hintText="Don't forget to include yourself!"
+              textFieldPlaceholder="Enter value"
+              targetPropertyName="teamMemberCount"
+              handleChange={updateNewConfiguration}
+              value={newConfiguration.teamMemberCount.toString()}
+              validation={(input) => /\d/.test(input)}
             />
-            <Checkbox
-              className="checkbox"
-              label="Send check-in reminder to your team"
-              onChange={(event) =>
-                updateNewConfiguration('checkInReminder', event.target.checked)
-              }
-              checked={newConfiguration.checkInReminder}
+            <AdminSetupStep
+              title="Step 3"
+              subTitle="What is your goal success rate for your team to meet each month?"
+              hintText="We recommend starting at 60%"
+              textFieldPlaceholder="Value"
+              textFieldAfterIcon={<p>%</p>}
+              targetPropertyName="teamSuccessRate"
+              handleChange={updateNewConfiguration}
+              value={newConfiguration.teamSuccessRate.toString()}
+              validation={(input) => /\d/.test(input)}
             />
           </Flex>
-          <Flex gap={Flex.gaps.LARGE} align={Flex.align.STRETCH}>
-            <Button className="reset-btn">Reset</Button>
-            <Button className="submit" onClick={confirmNewConfiguration}>
-              Submit
-            </Button>
+          <Flex
+            className="side-config-area"
+            direction={Flex.directions.COLUMN}
+            justify={Flex.justify.SPACE_BETWEEN}
+          >
+            <Flex
+              direction={Flex.directions.COLUMN}
+              align={Flex.align.START}
+              gap={Flex.gaps.LARGE}
+            >
+              <RadioButton
+                className={`card-lock-radio ${
+                  newConfiguration.globalCardLockState ? 'enabled' : ''
+                }`}
+                name="card-lock"
+                text="Lock all cards from all members"
+                onSelect={() =>
+                  updateNewConfiguration('globalCardLockState', true)
+                }
+                checked={newConfiguration.globalCardLockState}
+              />
+              <RadioButton
+                className={`card-lock-radio ${
+                  !newConfiguration.globalCardLockState ? 'enabled' : ''
+                }`}
+                name="card-lock"
+                text="Unlock all cards for members to edit"
+                defaultChecked
+                onSelect={() =>
+                  updateNewConfiguration('globalCardLockState', false)
+                }
+                checked={!newConfiguration.globalCardLockState}
+              />
+              <Checkbox
+                className="checkbox"
+                label="Send check-in reminder to your team"
+                onChange={(event) =>
+                  updateNewConfiguration(
+                    'checkInReminder',
+                    event.target.checked
+                  )
+                }
+                checked={newConfiguration.checkInReminder}
+              />
+            </Flex>
+            <Flex gap={Flex.gaps.LARGE} align={Flex.align.STRETCH}>
+              <Button className="reset-btn">Reset</Button>
+              <Button className="submit" type={Button.inputTags.SUBMIT}>
+                Submit
+              </Button>
+            </Flex>
           </Flex>
-        </Flex>
-      </div>
+        </div>
+      </form>
     </Box>
   );
 }
