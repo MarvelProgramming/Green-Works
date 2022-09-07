@@ -149,7 +149,7 @@ export default function App() {
   async function setMondaySettingsAndRemote(newSettings) {
     const updatedMondaySettings = await setRemoteMondaySettings(newSettings);
 
-    if (updatedMondaySettings?.checkInReminder) sendGlobalCheckinNotification();
+    if (newSettings?.checkInReminder) sendGlobalCheckinNotification();
 
     updateMondaySettings(updatedMondaySettings);
   }
@@ -279,8 +279,7 @@ export default function App() {
 
     if (!confirmation) return;
 
-    setMondaySettingsAndRemote(mondayDefaultSettings.value);
-
+    // Clears all tasks for all users
     for (let i = 0; i < users.length; i++) {
       const user = users[i];
       const newUser = {
@@ -290,6 +289,10 @@ export default function App() {
 
       await saveMondayUserData(newUser);
     }
+
+    setMondaySettingsAndRemote(mondayDefaultSettings.value);
+
+    setConfiguringMondaySettings(false);
   }
 
   return (
