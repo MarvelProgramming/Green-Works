@@ -87,7 +87,10 @@ export default function WidgetTasksMenu({
     <MenuModal
       className={taskMenuAnimation}
       title="Green Works"
-      submitDisabled={currentUser.data.tasks.length === 0}
+      submitDisabled={
+        currentUser.data.tasks.length === 0 ||
+        !currentUser.data.tasks.some((task) => task.toggle)
+      }
       handleSubmit={handleSubmit}
       handleClose={handleClose}
     >
