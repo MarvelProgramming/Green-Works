@@ -1,7 +1,7 @@
 {
   "name": "green-works",
   "description": "An app for tracking sustainable practices while incentivizing engagement in the digital workplace.",
-  "version": "4.11.0",
+  "version": "4.12.0",
   "private": true,
   "scripts": {
     "start": "npm run stop && concurrently \"npm run server\" \"npm run expose\"",
