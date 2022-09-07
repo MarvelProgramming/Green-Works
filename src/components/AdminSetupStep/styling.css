@@ -24,6 +24,9 @@
   border: none !important;
   border-radius: 0 !important;
   background-color: var(--super-light-grey) !important;
+}
+
+.admin-setup-step .input-area {
   margin-top: 0.5rem;
 }
 
