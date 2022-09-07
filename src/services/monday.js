@@ -184,3 +184,36 @@ export function listenForMondayFilterChange(callback) {
     console.log('Failed setting up the monday listener for filter!', err);
   }
 }
+
+/**
+ * Requests monday display a confirmation popup.
+ * @param {string} message - The text that will be displayed in the popup.
+ * @param {string} confirmButton - The text displayed for the 'confirm' button.
+ * @param {string} cancelButton - The text displayed for the 'cancel' button.
+ * @param {boolean} excludeCancelButton - Whether the cancel button should be displayed.
+ * @returns True if the user selected the 'confirm' button and false otherwise.
+ */
+export async function displayMondayConfirmation(
+  message = 'Are you sure?',
+  confirmButton = 'yes',
+  cancelButton = 'no',
+  excludeCancelButton = false
+) {
+  try {
+    const res = await monday.execute(
+      'confirm',
+      message,
+      confirmButton,
+      cancelButton,
+      excludeCancelButton
+    );
+
+    const confirmation = res.data.confirm;
+
+    return confirmation;
+  } catch (err) {
+    console.log('Failed to display monday confirmation! Returned false', err);
+
+    return false;
+  }
+}
