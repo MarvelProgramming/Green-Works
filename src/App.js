@@ -26,7 +26,6 @@ import userDefaultSettings from './data/userDefaultSettings';
 export default function App() {
   // I'm setting the initial state this way for local testing. All of this is overridden in production.
   const [users, setUsers] = useState([]);
-  const [progress, setProgress] = useState(0);
   const [currentUser, setCurrentUser] = useState(userDefaultSettings.value);
   const [mondaySettings, setMondaySettings] = useState({});
   const [mondayFilter, setMondayFilter] = useState('');
@@ -178,37 +177,6 @@ export default function App() {
   }
 
   /**
-   * Adjusts the amount of fill users see in the goal progress bar.
-   */
-  function updateGoalProgressBar() {
-    // TODO: Progress is determined by how many points a team has accrued, relative to a total point goal. The current implementation
-    // takes the average completion percentage between all team members.
-    const userCount = users.filter((user) => user.tasks.length > 0).length;
-    const userTaskCompletionPercentages = users.map((user) => {
-      const totalCompletionPercentage = user.tasks.reduce(
-        (completionPercentage, nextTask) =>
-          completionPercentage + Math.min(nextTask.status / 7.5, 1),
-        0
-      );
-      return (
-        totalCompletionPercentage /
-        (user.tasks.length > 0 ? user.tasks.length : 1)
-      );
-    });
-    const totalTaskCompletionPercentage = userTaskCompletionPercentages.reduce(
-      (total, nextPercentage) => total + nextPercentage,
-      0
-    );
-
-    // Ensures the progress bar is never completely empty. Would simply return before the setProgress call,
-    // but that causes issues with updating the state of child elements.
-    const averageTaskPercentage =
-      totalTaskCompletionPercentage / userCount || 0.01;
-
-    setProgress(averageTaskPercentage);
-  }
-
-  /**
    * A wrapper for updating and saving user data.
    * @param {function} updateCallback - A callback that performs work on the active user's data.
    */
@@ -222,8 +190,10 @@ export default function App() {
     newUsers.splice(userIdx, 1, newUser);
     setUsers(newUsers);
     setCurrentUser(newUser);
-    updateGoalProgressBar();
     saveMondayUserData(currentUser);
+    setMondaySettingsAndRemote({
+      teamProgress: mondaySettings.teamProgress + 1
+    });
   }
 
   /**
@@ -268,10 +238,7 @@ export default function App() {
         >
           <MainWidget />
           <LegendList />
-          <GoalProgressArea
-            progress={progress}
-            teamGoal={mondaySettings.teamGoal}
-          />
+          <GoalProgressArea mondaySettings={mondaySettings} />
           <ProgressCardList
             users={
               mondayFilter.length > 0
@@ -283,7 +250,7 @@ export default function App() {
                   )
                 : users
             }
-            updateGoalProgressBar={updateGoalProgressBar}
+            mondaySettings={mondaySettings}
           />
         </CurrentUserContext.Provider>
       </Box>

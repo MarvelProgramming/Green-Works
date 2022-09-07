@@ -4,7 +4,7 @@ import LinearProgressBar from 'monday-ui-react-core/dist/LinearProgressBar';
 import Box from 'monday-ui-react-core/dist/Box';
 import Flex from 'monday-ui-react-core/dist/Flex';
 
-export default function GoalProgressBar({ progress }) {
+export default function GoalProgressBar({ mondaySettings }) {
   return (
     <Box className="goal-progress-bar">
       <Flex className="progress-praise top" justify={Flex.justify.END}>
@@ -16,7 +16,11 @@ export default function GoalProgressBar({ progress }) {
       <Box className="progress-area" border={Box.borders.SMALL}>
         <LinearProgressBar
           className="linear-progress-bar_small-wrapper progress"
-          value={Math.max(progress * 100, 1)}
+          value={Math.max(
+            (mondaySettings.teamProgress / mondaySettings.teamProgressGoal) *
+              100,
+            1
+          )}
           size={LinearProgressBar.sizes.LARGE}
         />
         {/* Each div here represents a vertical line on the progress bar (minus the last one, but is still needed for spacing) */}

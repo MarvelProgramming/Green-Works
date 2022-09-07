@@ -107,6 +107,7 @@ export async function getMondaySettings() {
     return mondaySettings;
   } catch (err) {
     console.log("Couldn't get monday settings! Returned empty object", err);
+
     return {};
   }
 }
@@ -120,7 +121,7 @@ export async function setMondaySettings(newSettings) {
   try {
     const res = await monday.set('settings', newSettings);
 
-    const newMondaySettings = res.data;
+    const newMondaySettings = res.data.configuration.settings;
 
     return newMondaySettings;
   } catch (err) {
