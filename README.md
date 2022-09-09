@@ -26,6 +26,8 @@ Green Works is an app built for [Monday](https://www.monday.com), during a hacka
 
 Users visit [Monday.com](https://www.monday.com), navigate to a workspace, and create a new board (installing Green Works from the [app marketplace](https://monday.com/marketplace)). Teams may then configure a monthly point goal, setup tasks, collaborate, and more.
 
+https://user-images.githubusercontent.com/51891409/189399722-2ada4081-e320-46b8-8329-60a5b1ae655b.mp4
+
 </br>
 </br>
 
